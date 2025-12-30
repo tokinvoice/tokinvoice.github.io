@@ -1261,12 +1261,12 @@ body {
 }
 
 .lender-return {
-    width: 80%;
-    max-width: 380px;
-    height: 40px;
-    border: 3px solid var(--border);
+    width: 70%;
+    max-width: 320px;
+    height: 30px;
+    border: 2px solid var(--border);
     border-top: none;
-    border-radius: 0 0 40px 40px;
+    border-radius: 0 0 30px 30px;
     background: transparent;
     position: relative;
 }
@@ -1275,56 +1275,78 @@ body {
     display: none;
 }
 
-.lender-return .connector-packet {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
+/* Principal return - green */
+.lender-return-principal {
+    border-color: rgba(34, 197, 94, 0.4);
 }
 
-.lender-return.animating {
-    border-color: #4caf50;
+.lender-return-principal.animating,
+.lender-return-principal.completed {
+    border-color: #22c55e;
 }
 
-.lender-return.animating .connector-packet {
-    opacity: 1;
-    animation: returnPacket 1s ease-in-out forwards;
+/* Interest return - gold/yellow */
+.lender-return-interest {
+    border-color: rgba(250, 204, 21, 0.4);
+    margin-top: -10px;
+    width: 50%;
+    max-width: 240px;
+    height: 24px;
 }
 
-@keyframes returnPacket {
-    0% { left: 90%; opacity: 1; }
-    100% { left: 10%; opacity: 1; }
-}
-
-.lender-return.completed {
-    border-color: #4caf50;
+.lender-return-interest.animating,
+.lender-return-interest.completed {
+    border-color: #facc15;
 }
 
 .return-label {
     position: absolute;
-    bottom: -24px;
+    bottom: 2px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-light);
     white-space: nowrap;
+    background: var(--bg);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.lender-return-principal .return-label {
+    color: #22c55e;
+}
+
+.lender-return-interest .return-label {
+    color: #facc15;
 }
 
 /* Arrow heads for lender return */
 .lender-return::before {
     content: '←';
     position: absolute;
-    left: -8px;
-    bottom: -4px;
-    font-size: 1.2rem;
+    left: -4px;
+    bottom: -6px;
+    font-size: 1rem;
     color: var(--border);
     transition: color 0.3s ease;
 }
 
-.lender-return.animating::before,
-.lender-return.completed::before {
-    color: #4caf50;
+.lender-return-principal::before {
+    color: rgba(34, 197, 94, 0.5);
+}
+
+.lender-return-principal.animating::before,
+.lender-return-principal.completed::before {
+    color: #22c55e;
+}
+
+.lender-return-interest::before {
+    color: rgba(250, 204, 21, 0.5);
+}
+
+.lender-return-interest.animating::before,
+.lender-return-interest.completed::before {
+    color: #facc15;
 }
 
 .triangle-return.completed .connector-track {

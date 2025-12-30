@@ -162,11 +162,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const lenderSteps = [
         { caption: "Click NEXT to see how it works", activeNode: null, animateConnector: null },
         { caption: "💵 You deposit capital into the lending vault", activeNode: "investor", animateConnector: 0 },
-        { caption: "🏦 The vault pools investor funds", activeNode: "vault", animateConnector: null },
-        { caption: "🎫 Your capital funds tokenized invoices", activeNode: "vault", animateConnector: 1 },
-        { caption: "📄 Invoices are repaid by borrowers", activeNode: "invoices", animateConnector: null },
-        { caption: "💰 Yield + principal flows back to you", activeNode: "invoices", animateConnector: "return" },
-        { caption: "✅ Done! You earned yield from real-world invoice financing", activeNode: "investor", animateConnector: null }
+        { caption: "🏦 The vault pools funds from multiple lenders", activeNode: "vault", animateConnector: null },
+        { caption: "💵 Capital is lent to borrowers against their invoices", activeNode: "vault", animateConnector: 1 },
+        { caption: "🏢 Borrower receives funds and uses them for operations", activeNode: "borrower", animateConnector: null },
+        { caption: "💵 When invoice is paid, borrower repays the principal", activeNode: "borrower", animateConnector: "principal" },
+        { caption: "💰 Plus interest earned on top of your capital", activeNode: "borrower", animateConnector: "interest" },
+        { caption: "✅ Done! Your capital + interest returns to you", activeNode: "investor", animateConnector: null }
     ];
 
     // Initialize step flows
@@ -212,9 +213,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             } else {
-                // Lender flow - now uses same index-based approach for main connectors
+                // Lender flow - handles main connectors and return arrows
                 const lenderConnectors = flow.querySelectorAll('.lender-main-row .flow-connector');
-                const returnConnector = flow.querySelector('.lender-return');
+                const principalReturn = flow.querySelector('.lender-return-principal');
+                const interestReturn = flow.querySelector('.lender-return-interest');
 
                 for (let i = 1; i < stepIndex; i++) {
                     const nodeName = lenderSteps[i].activeNode;
@@ -223,8 +225,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (node) node.classList.add('completed');
                     }
                     const connId = lenderSteps[i].animateConnector;
-                    if (connId === "return" && returnConnector) {
-                        returnConnector.classList.add('completed');
+                    if (connId === "principal" && principalReturn) {
+                        principalReturn.classList.add('completed');
+                    } else if (connId === "interest" && interestReturn) {
+                        interestReturn.classList.add('completed');
                     } else if (typeof connId === 'number' && lenderConnectors[connId]) {
                         lenderConnectors[connId].classList.add('completed');
                     }
@@ -241,9 +245,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (step.animateConnector !== null) {
                 const connectors = flow.querySelectorAll(isBorrower ? '.flow-connector' : '.lender-main-row .flow-connector');
 
-                if (step.animateConnector === "return") {
-                    const returnConn = flow.querySelector('.lender-return');
-                    if (returnConn) returnConn.classList.add('animating');
+                if (step.animateConnector === "principal") {
+                    const principalConn = flow.querySelector('.lender-return-principal');
+                    if (principalConn) principalConn.classList.add('animating');
+                } else if (step.animateConnector === "interest") {
+                    const interestConn = flow.querySelector('.lender-return-interest');
+                    if (interestConn) interestConn.classList.add('animating');
                 } else if (typeof step.animateConnector === 'number' && connectors[step.animateConnector]) {
                     connectors[step.animateConnector].classList.add('animating');
                 }
