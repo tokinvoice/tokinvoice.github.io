@@ -246,10 +246,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
+            // Build step history (previous steps shown as faded list)
+            const historyContainer = flow.querySelector('.step-history');
+            if (historyContainer) {
+                historyContainer.innerHTML = '';
+                for (let i = 1; i < stepIndex; i++) {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'step-history-item';
+                    historyItem.innerHTML = `<span class="mini-badge">✓</span> ${steps[i].caption.replace(/^[^\s]+\s/, '')}`;
+                    historyContainer.appendChild(historyItem);
+                }
+            }
+
             // Update button states
             resetBtn.disabled = stepIndex === 0;
             if (stepIndex >= steps.length - 1) {
-                nextBtn.textContent = '✓ Complete';
+                nextBtn.textContent = '✓';
                 nextBtn.disabled = true;
             } else {
                 nextBtn.textContent = 'Next →';
