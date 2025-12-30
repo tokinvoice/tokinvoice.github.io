@@ -401,19 +401,23 @@
                                         <span class="burn-label">Token burned on repayment</span>
                                     </div>
                                 </div>
-                                <!-- Return arrows: Principal and Interest -->
-                                <div class="lender-return-row">
-                                    <div class="return-arrow lender-return-principal">
-                                        <div class="return-track"></div>
-                                        <div class="return-packet">💵</div>
-                                        <span class="return-label">Principal</span>
+                                <!-- Simplified return lanes: Principal and Interest stacked -->
+                                <div class="lender-return-lanes">
+                                    <div class="return-lane lender-return-principal" data-lane="principal">
+                                        <span class="return-lane-label">Principal</span>
+                                        <div class="return-lane-track">
+                                            <div class="return-lane-arrow"></div>
+                                            <div class="return-lane-packet">💵</div>
+                                        </div>
+                                        <div class="return-lane-token">💵</div>
                                     </div>
-                                </div>
-                                <div class="lender-return-row">
-                                    <div class="return-arrow lender-return-interest">
-                                        <div class="return-track"></div>
-                                        <div class="return-packet">💰</div>
-                                        <span class="return-label">Interest</span>
+                                    <div class="return-lane lender-return-interest" data-lane="interest">
+                                        <span class="return-lane-label">Interest</span>
+                                        <div class="return-lane-track">
+                                            <div class="return-lane-arrow"></div>
+                                            <div class="return-lane-packet">💰</div>
+                                        </div>
+                                        <div class="return-lane-token">💰</div>
                                     </div>
                                 </div>
                             </div>

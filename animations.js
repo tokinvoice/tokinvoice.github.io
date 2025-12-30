@@ -79,43 +79,37 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Initialize step flows
-    document.querySelectorAll('.step-flow').forEach(flow => {
+	    document.querySelectorAll('.step-flow').forEach(flow => {
         const isBorrower = flow.classList.contains('borrower-step-flow');
         const steps = isBorrower ? borrowerSteps : lenderSteps;
         const nextBtn = flow.querySelector('.step-btn-next');
         const resetBtn = flow.querySelector('.step-btn-reset');
         let currentStep = 0;
 
-        function resetAllElements() {
-            // Reset nodes
-            flow.querySelectorAll('.flow-node').forEach(n => {
-                gsap.set(n, { clearProps: "all" });
-                n.classList.remove('active', 'completed');
-            });
-            flow.querySelectorAll('.node-circle').forEach(c => {
-                gsap.set(c, { clearProps: "all" });
-            });
-            // Reset connectors
-            flow.querySelectorAll('.flow-connector').forEach(c => {
-                c.classList.remove('animating', 'completed');
-            });
-            flow.querySelectorAll('.connector-packet').forEach(p => {
-                gsap.set(p, { clearProps: "all", opacity: 0, x: 0 });
-            });
-            flow.querySelectorAll('.connector-track').forEach(t => {
-                gsap.set(t, { clearProps: "all" });
-            });
-            // Reset return arrows
-            flow.querySelectorAll('.return-arrow').forEach(r => {
-                r.classList.remove('animating', 'completed');
-            });
-            flow.querySelectorAll('.return-packet').forEach(p => {
-                gsap.set(p, { clearProps: "all", opacity: 0, left: "calc(100% - 24px)" });
-            });
-            flow.querySelectorAll('.return-track').forEach(t => {
-                gsap.set(t, { clearProps: "all" });
-            });
-            // Reset token
+	        function resetAllElements() {
+	            // Reset nodes
+	            flow.querySelectorAll('.flow-node').forEach(n => {
+	                gsap.set(n, { clearProps: "all" });
+	                n.classList.remove('active', 'completed');
+	            });
+	            flow.querySelectorAll('.node-circle').forEach(c => {
+	                gsap.set(c, { clearProps: "all" });
+	            });
+	            // Reset connectors
+	            flow.querySelectorAll('.flow-connector').forEach(c => {
+	                c.classList.remove('animating', 'completed');
+	            });
+	            flow.querySelectorAll('.connector-packet').forEach(p => {
+	                gsap.set(p, { clearProps: "all", opacity: 0, x: 0 });
+	            });
+	            flow.querySelectorAll('.connector-track').forEach(t => {
+	                gsap.set(t, { clearProps: "all" });
+	            });
+	            // Reset simplified lender return lanes
+	            flow.querySelectorAll('.return-lane').forEach(lane => {
+	                lane.classList.remove('animating', 'completed');
+	            });
+	            // Reset token
             const vaultToken = flow.querySelector('.vault-token');
             if (vaultToken) {
                 gsap.set(vaultToken, { clearProps: "all", opacity: 0, scale: 0 });
@@ -286,119 +280,99 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        function markConnectorCompleted(connId) {
-            if (isBorrower) {
-                const connectors = flow.querySelectorAll('.flow-connector');
-                if (typeof connId === 'number' && connectors[connId]) {
-                    const track = connectors[connId].querySelector('.connector-track');
-                    const packet = connectors[connId].querySelector('.connector-packet');
-                    if (track) gsap.set(track, { backgroundColor: "#22d3ee" });
-                    if (packet) gsap.set(packet, { opacity: 1, x: 60 });
-                }
-            } else {
-                const lenderConnectors = flow.querySelectorAll('.lender-main-row .flow-connector:not(.exchange-connector)');
-                if (connId === "exchange") {
-                    const exchConn = flow.querySelector('.exchange-connector');
-                    if (exchConn) {
-                        const track = exchConn.querySelector('.connector-track');
-                        const moneyPacket = exchConn.querySelector('.money-out');
-                        if (track) gsap.set(track, { backgroundColor: "#22d3ee" });
-                        if (moneyPacket) gsap.set(moneyPacket, { opacity: 1, x: 60 });
-                    }
-                } else if (connId === "principal") {
-                    const princ = flow.querySelector('.lender-return-principal');
-                    if (princ) {
-                        const track = princ.querySelector('.return-track');
-                        const packet = princ.querySelector('.return-packet');
-                        if (track) gsap.set(track, { backgroundColor: "#22c55e" });
-                        if (packet) gsap.set(packet, { opacity: 1, left: "0px" });
-                    }
-                } else if (connId === "interest") {
-                    const inter = flow.querySelector('.lender-return-interest');
-                    if (inter) {
-                        const track = inter.querySelector('.return-track');
-                        const packet = inter.querySelector('.return-packet');
-                        if (track) gsap.set(track, { backgroundColor: "#facc15" });
-                        if (packet) gsap.set(packet, { opacity: 1, left: "0px" });
-                    }
-                } else if (typeof connId === 'number' && lenderConnectors[connId]) {
-                    const track = lenderConnectors[connId].querySelector('.connector-track');
-                    const packet = lenderConnectors[connId].querySelector('.connector-packet');
-                    if (track) gsap.set(track, { backgroundColor: "#22d3ee" });
-                    if (packet) gsap.set(packet, { opacity: 1, x: 60 });
-                }
-            }
-        }
+	        function markConnectorCompleted(connId) {
+	            if (isBorrower) {
+	                const connectors = flow.querySelectorAll('.flow-connector');
+	                if (typeof connId === 'number' && connectors[connId]) {
+	                    const track = connectors[connId].querySelector('.connector-track');
+	                    const packet = connectors[connId].querySelector('.connector-packet');
+	                    if (track) gsap.set(track, { backgroundColor: "#22d3ee" });
+	                    if (packet) gsap.set(packet, { opacity: 1, x: 60 });
+	                }
+	            } else {
+	                const lenderConnectors = flow.querySelectorAll('.lender-main-row .flow-connector:not(.exchange-connector)');
+	                if (connId === "exchange") {
+	                    const exchConn = flow.querySelector('.exchange-connector');
+	                    if (exchConn) {
+	                        const track = exchConn.querySelector('.connector-track');
+	                        const moneyPacket = exchConn.querySelector('.money-out');
+	                        if (track) gsap.set(track, { backgroundColor: "#22d3ee" });
+	                        if (moneyPacket) gsap.set(moneyPacket, { opacity: 1, x: 60 });
+	                    }
+	                } else if (connId === "principal") {
+	                    const princLane = flow.querySelector('.lender-return-principal');
+	                    if (princLane) {
+	                        princLane.classList.add('completed');
+	                    }
+	                } else if (connId === "interest") {
+	                    const interestLane = flow.querySelector('.lender-return-interest');
+	                    if (interestLane) {
+	                        interestLane.classList.add('completed');
+	                    }
+	                } else if (typeof connId === 'number' && lenderConnectors[connId]) {
+	                    const track = lenderConnectors[connId].querySelector('.connector-track');
+	                    const packet = lenderConnectors[connId].querySelector('.connector-packet');
+	                    if (track) gsap.set(track, { backgroundColor: "#22d3ee" });
+	                    if (packet) gsap.set(packet, { opacity: 1, x: 60 });
+	                }
+	            }
+	        }
 
-        function animateConnector(connId) {
-            if (isBorrower) {
-                const connectors = flow.querySelectorAll('.flow-connector');
-                if (typeof connId === 'number' && connectors[connId]) {
-                    const track = connectors[connId].querySelector('.connector-track');
-                    const packet = connectors[connId].querySelector('.connector-packet');
-                    if (track) {
-                        gsap.to(track, { backgroundColor: "#818cf8", duration: 0.3 });
-                    }
-                    if (packet) {
-                        gsap.set(packet, { opacity: 1, x: 0 });
-                        gsap.to(packet, { x: 60, duration: 1, ease: "power2.inOut" });
-                    }
-                }
-            } else {
-                if (connId === "exchange") {
-                    const exchConn = flow.querySelector('.exchange-connector');
-                    if (exchConn) {
-                        const track = exchConn.querySelector('.connector-track');
-                        const moneyPacket = exchConn.querySelector('.money-out');
-                        const tokenPacket = exchConn.querySelector('.token-in');
-                        if (track) gsap.to(track, { backgroundColor: "#818cf8", duration: 0.3 });
-                        if (moneyPacket) {
-                            gsap.set(moneyPacket, { opacity: 1, x: 0 });
-                            gsap.to(moneyPacket, { x: 60, duration: 1, ease: "power2.inOut" });
-                        }
-                        if (tokenPacket) {
-                            gsap.set(tokenPacket, { opacity: 1, x: 60 });
-                            gsap.to(tokenPacket, { x: 0, duration: 1, delay: 0.5, ease: "power2.inOut" });
-                        }
-                    }
-                } else if (connId === "principal") {
-                    const princ = flow.querySelector('.lender-return-principal');
-                    if (princ) {
-                        const track = princ.querySelector('.return-track');
-                        const packet = princ.querySelector('.return-packet');
-                        if (track) gsap.to(track, { backgroundColor: "#22c55e", duration: 0.3 });
-                        if (packet) {
-                            // Start at right side (calc(100% - 24px)), animate to left (0px)
-                            gsap.set(packet, { opacity: 1, left: "calc(100% - 24px)" });
-                            gsap.to(packet, { left: "0px", duration: 1.2, ease: "power2.inOut" });
-                        }
-                    }
-                } else if (connId === "interest") {
-                    const inter = flow.querySelector('.lender-return-interest');
-                    if (inter) {
-                        const track = inter.querySelector('.return-track');
-                        const packet = inter.querySelector('.return-packet');
-                        if (track) gsap.to(track, { backgroundColor: "#facc15", duration: 0.3 });
-                        if (packet) {
-                            // Start at right side, animate to left
-                            gsap.set(packet, { opacity: 1, left: "calc(100% - 24px)" });
-                            gsap.to(packet, { left: "0px", duration: 1.2, ease: "power2.inOut" });
-                        }
-                    }
-                } else {
-                    const lenderConnectors = flow.querySelectorAll('.lender-main-row .flow-connector:not(.exchange-connector)');
-                    if (typeof connId === 'number' && lenderConnectors[connId]) {
-                        const track = lenderConnectors[connId].querySelector('.connector-track');
-                        const packet = lenderConnectors[connId].querySelector('.connector-packet');
-                        if (track) gsap.to(track, { backgroundColor: "#818cf8", duration: 0.3 });
-                        if (packet) {
-                            gsap.set(packet, { opacity: 1, x: 0 });
-                            gsap.to(packet, { x: 60, duration: 1, ease: "power2.inOut" });
-                        }
-                    }
-                }
-            }
-        }
+	        function animateConnector(connId) {
+	            if (isBorrower) {
+	                const connectors = flow.querySelectorAll('.flow-connector');
+	                if (typeof connId === 'number' && connectors[connId]) {
+	                    const track = connectors[connId].querySelector('.connector-track');
+	                    const packet = connectors[connId].querySelector('.connector-packet');
+	                    if (track) {
+	                        gsap.to(track, { backgroundColor: "#818cf8", duration: 0.3 });
+	                    }
+	                    if (packet) {
+	                        gsap.set(packet, { opacity: 1, x: 0 });
+	                        gsap.to(packet, { x: 60, duration: 1, ease: "power2.inOut" });
+	                    }
+	                }
+	            } else {
+	                if (connId === "exchange") {
+	                    const exchConn = flow.querySelector('.exchange-connector');
+	                    if (exchConn) {
+	                        const track = exchConn.querySelector('.connector-track');
+	                        const moneyPacket = exchConn.querySelector('.money-out');
+	                        const tokenPacket = exchConn.querySelector('.token-in');
+	                        if (track) gsap.to(track, { backgroundColor: "#818cf8", duration: 0.3 });
+	                        if (moneyPacket) {
+	                            gsap.set(moneyPacket, { opacity: 1, x: 0 });
+	                            gsap.to(moneyPacket, { x: 60, duration: 1, ease: "power2.inOut" });
+	                        }
+	                        if (tokenPacket) {
+	                            gsap.set(tokenPacket, { opacity: 1, x: 60 });
+	                            gsap.to(tokenPacket, { x: 0, duration: 1, delay: 0.5, ease: "power2.inOut" });
+	                        }
+	                    }
+	                } else if (connId === "principal") {
+	                    const princLane = flow.querySelector('.lender-return-principal');
+	                    if (princLane) {
+	                        princLane.classList.add('animating');
+	                    }
+	                } else if (connId === "interest") {
+	                    const interestLane = flow.querySelector('.lender-return-interest');
+	                    if (interestLane) {
+	                        interestLane.classList.add('animating');
+	                    }
+	                } else {
+	                    const lenderConnectors = flow.querySelectorAll('.lender-main-row .flow-connector:not(.exchange-connector)');
+	                    if (typeof connId === 'number' && lenderConnectors[connId]) {
+	                        const track = lenderConnectors[connId].querySelector('.connector-track');
+	                        const packet = lenderConnectors[connId].querySelector('.connector-packet');
+	                        if (track) gsap.to(track, { backgroundColor: "#818cf8", duration: 0.3 });
+	                        if (packet) {
+	                            gsap.set(packet, { opacity: 1, x: 0 });
+	                            gsap.to(packet, { x: 60, duration: 1, ease: "power2.inOut" });
+	                        }
+	                    }
+	                }
+	            }
+	        }
 
         nextBtn.addEventListener('click', () => {
             if (currentStep < steps.length - 1) {
