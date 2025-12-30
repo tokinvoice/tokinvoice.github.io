@@ -1335,7 +1335,7 @@ body {
 
 .return-packet {
     position: absolute;
-    right: 0;
+    left: calc(100% - 24px);
     top: 50%;
     transform: translateY(-50%);
     font-size: 1.2rem;

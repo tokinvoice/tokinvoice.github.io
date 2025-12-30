@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 r.classList.remove('animating', 'completed');
             });
             flow.querySelectorAll('.return-packet').forEach(p => {
-                gsap.set(p, { clearProps: "all", opacity: 0, x: 0 });
+                gsap.set(p, { clearProps: "all", opacity: 0, left: "calc(100% - 24px)" });
             });
             flow.querySelectorAll('.return-track').forEach(t => {
                 gsap.set(t, { clearProps: "all" });
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const track = princ.querySelector('.return-track');
                         const packet = princ.querySelector('.return-packet');
                         if (track) gsap.set(track, { backgroundColor: "#22c55e" });
-                        if (packet) gsap.set(packet, { opacity: 1, x: -280 });
+                        if (packet) gsap.set(packet, { opacity: 1, left: "0px" });
                     }
                 } else if (connId === "interest") {
                     const inter = flow.querySelector('.lender-return-interest');
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const track = inter.querySelector('.return-track');
                         const packet = inter.querySelector('.return-packet');
                         if (track) gsap.set(track, { backgroundColor: "#facc15" });
-                        if (packet) gsap.set(packet, { opacity: 1, x: -280 });
+                        if (packet) gsap.set(packet, { opacity: 1, left: "0px" });
                     }
                 } else if (typeof connId === 'number' && lenderConnectors[connId]) {
                     const track = lenderConnectors[connId].querySelector('.connector-track');
@@ -368,8 +368,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         const packet = princ.querySelector('.return-packet');
                         if (track) gsap.to(track, { backgroundColor: "#22c55e", duration: 0.3 });
                         if (packet) {
-                            gsap.set(packet, { opacity: 1, x: 0 });
-                            gsap.to(packet, { x: -280, duration: 1.2, ease: "power2.inOut" });
+                            // Start at right side (calc(100% - 24px)), animate to left (0px)
+                            gsap.set(packet, { opacity: 1, left: "calc(100% - 24px)" });
+                            gsap.to(packet, { left: "0px", duration: 1.2, ease: "power2.inOut" });
                         }
                     }
                 } else if (connId === "interest") {
@@ -379,8 +380,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         const packet = inter.querySelector('.return-packet');
                         if (track) gsap.to(track, { backgroundColor: "#facc15", duration: 0.3 });
                         if (packet) {
-                            gsap.set(packet, { opacity: 1, x: 0 });
-                            gsap.to(packet, { x: -280, duration: 1.2, ease: "power2.inOut" });
+                            // Start at right side, animate to left
+                            gsap.set(packet, { opacity: 1, left: "calc(100% - 24px)" });
+                            gsap.to(packet, { left: "0px", duration: 1.2, ease: "power2.inOut" });
                         }
                     }
                 } else {
