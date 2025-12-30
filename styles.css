@@ -270,6 +270,210 @@ body {
     color: var(--primary);
 }
 
+/* Journey Section */
+.journey-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+}
+
+.journey-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border: 2px solid var(--border);
+    background: var(--bg);
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.journey-tab:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.journey-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.tab-icon {
+    font-size: 1.3rem;
+}
+
+.journey-container {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.journey-container.hidden {
+    display: none;
+    opacity: 0;
+}
+
+/* Journey Timeline */
+.journey-timeline {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+}
+
+.journey-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 140px;
+    opacity: 0;
+    animation: stepFadeIn 0.5s ease forwards;
+}
+
+.journey-step[data-step="1"] { animation-delay: 0.1s; }
+.journey-step[data-step="2"] { animation-delay: 0.3s; }
+.journey-step[data-step="3"] { animation-delay: 0.5s; }
+.journey-step[data-step="4"] { animation-delay: 0.7s; }
+.journey-step[data-step="5"] { animation-delay: 0.9s; }
+
+@keyframes stepFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-icon-wrapper {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.step-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--bg);
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    position: relative;
+    z-index: 2;
+}
+
+.step-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0;
+    animation: pulse 2s infinite;
+}
+
+.journey-step:hover .step-pulse {
+    animation: pulseHover 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes pulseHover {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 0;
+    }
+}
+
+.step-content h4 {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    color: var(--text);
+}
+
+.step-content p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Journey Connector */
+.journey-connector {
+    display: flex;
+    align-items: center;
+    padding-top: 32px;
+    width: 40px;
+}
+
+.connector-line {
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    flex: 1;
+    position: relative;
+    animation: lineGrow 0.8s ease forwards;
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+.journey-connector:nth-of-type(2) .connector-line { animation-delay: 0.2s; }
+.journey-connector:nth-of-type(4) .connector-line { animation-delay: 0.4s; }
+.journey-connector:nth-of-type(6) .connector-line { animation-delay: 0.6s; }
+.journey-connector:nth-of-type(8) .connector-line { animation-delay: 0.8s; }
+
+@keyframes lineGrow {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.connector-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: dotPop 0.3s ease forwards;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.journey-connector:nth-of-type(2) .connector-dot { animation-delay: 0.4s; }
+.journey-connector:nth-of-type(4) .connector-dot { animation-delay: 0.6s; }
+.journey-connector:nth-of-type(6) .connector-dot { animation-delay: 0.8s; }
+.journey-connector:nth-of-type(8) .connector-dot { animation-delay: 1s; }
+
+@keyframes dotPop {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero h1 {
@@ -328,3 +532,279 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
+
+
+
+/* Flow Animation */
+.flow-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 184, 148, 0.05) 100%);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.flow-entity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.entity-avatar {
+    width: 72px;
+    height: 72px;
+    background: var(--bg);
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flow-entity:hover .entity-avatar {
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(0, 102, 204, 0.25);
+}
+
+.flow-entity span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.flow-arrow {
+    display: flex;
+    align-items: center;
+    width: 120px;
+    height: 60px;
+    position: relative;
+}
+
+.arrow-line {
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 2px;
+    position: relative;
+}
+
+.arrow-line::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-left: 12px solid var(--accent);
+}
+
+.flow-arrow.reverse .arrow-line {
+    background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+
+.flow-arrow.reverse .arrow-line::after {
+    right: auto;
+    left: 0;
+    border-left: none;
+    border-right: 12px solid var(--primary);
+}
+
+.flow-packet {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: flowRight 2s infinite ease-in-out;
+}
+
+.flow-arrow.reverse .flow-packet {
+    animation: flowLeft 2s infinite ease-in-out;
+}
+
+@keyframes flowRight {
+    0% {
+        left: 0;
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        left: calc(100% - 24px);
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+@keyframes flowLeft {
+    0% {
+        left: calc(100% - 24px);
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        left: 0;
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+/* Stagger animations for multiple arrows */
+.flow-arrow:nth-of-type(2) .flow-packet { animation-delay: 0.5s; }
+.flow-arrow:nth-of-type(4) .flow-packet { animation-delay: 1s; }
+.flow-arrow.yield-arrow .flow-packet { animation-delay: 1.5s; }
+
+/* Lender flow specific */
+.lender-flow .flow-arrow:nth-of-type(4) {
+    position: relative;
+}
+
+.lender-flow .flow-arrow:nth-of-type(4)::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 60%;
+    height: 40px;
+    border: 4px solid transparent;
+    border-bottom: 4px solid var(--accent);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 0 0 20px;
+    transform: translateX(-80%);
+}
+
+/* Journey mobile responsive */
+@media (max-width: 900px) {
+    .journey-timeline {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .journey-connector {
+        transform: rotate(90deg);
+        padding-top: 0;
+        height: 40px;
+        width: auto;
+    }
+
+    .flow-animation {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .flow-arrow {
+        transform: rotate(90deg);
+        width: 80px;
+        height: 40px;
+    }
+
+    .flow-arrow.reverse {
+        transform: rotate(-90deg);
+    }
+}
+
+@media (max-width: 600px) {
+    .journey-toggle {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .journey-tab {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
+
+
+/* Journey Step Interaction */
+.journey-step {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.journey-step:hover {
+    transform: translateY(-4px);
+}
+
+.journey-step.highlighted .step-icon {
+    background: var(--primary);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(0, 102, 204, 0.4);
+}
+
+.journey-step .step-icon {
+    transition: all 0.3s ease;
+}
+
+/* Animate In */
+.animate-in {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Platform entity special styling */
+.flow-entity.platform .entity-avatar {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border: none;
+    color: white;
+}
+
+.flow-entity.vault .entity-avatar {
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+    border: none;
+}
+
+.flow-entity.invoices .entity-avatar {
+    background: linear-gradient(135deg, #ff9800, #ffb74d);
+    border: none;
+}
+
+/* Improve packet visibility */
+.flow-packet {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.money-packet {
+    animation-duration: 1.8s !important;
+}
+
+.invoice-packet {
+    animation-duration: 2.2s !important;
+}
+
+.yield-packet {
+    animation-duration: 2.5s !important;
+}
