@@ -1095,83 +1095,93 @@ body {
 }
 
 /* ========================================
-   TRIANGLE LAYOUT (for lender flow)
+   LENDER LAYOUT (linear with return arrow below)
    ======================================== */
 
-.triangle-layout {
+.lender-layout {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
 }
 
-.triangle-top {
-    display: flex;
-    justify-content: center;
-}
-
-.triangle-connectors {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    position: relative;
-}
-
-/* Left arrow: Investor → Vault (pointing UP-RIGHT toward vault) */
-.triangle-left {
-    width: 70px;
-    height: 50px;
-    transform: rotate(-50deg);
-}
-
-/* Arrow points toward vault (up) */
-.triangle-left .connector-track::after {
-    transform: translateY(-50%) rotate(50deg);
-}
-
-/* Right arrow: Vault → Invoices (pointing DOWN-RIGHT toward invoices) */
-.triangle-right {
-    width: 70px;
-    height: 50px;
-    transform: rotate(50deg);
-}
-
-.triangle-right .connector-track::after {
-    transform: translateY(-50%) rotate(-50deg);
-}
-
-.triangle-bottom {
+.lender-main-row {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0;
 }
 
-/* Return arrow: Invoices → Investor (pointing LEFT) */
-.triangle-return {
-    width: 100px;
+/* Return arrow row - curved arrow below main flow */
+.lender-return-row {
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
-/* Make it a reverse arrow (points left) */
-.triangle-return .connector-track::after {
-    right: auto;
-    left: -6px;
-    border-left: none;
-    border-right: 10px solid var(--border);
+.lender-return {
+    width: 80%;
+    max-width: 380px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 40px 40px;
+    background: transparent;
+    position: relative;
 }
 
-.triangle-return .connector-track {
-    background: var(--border);
+.lender-return .connector-track {
+    display: none;
 }
 
-.triangle-return.animating .connector-track {
-    background: linear-gradient(270deg, #4caf50, #81c784);
+.lender-return .connector-packet {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
 }
 
-.triangle-return.animating .connector-track::after {
-    border-right-color: #4caf50;
+.lender-return.animating {
+    border-color: #4caf50;
 }
 
-.triangle-return.completed .connector-track::after {
-    border-right-color: #4caf50;
+.lender-return.animating .connector-packet {
+    opacity: 1;
+    animation: returnPacket 1s ease-in-out forwards;
+}
+
+@keyframes returnPacket {
+    0% { left: 90%; opacity: 1; }
+    100% { left: 10%; opacity: 1; }
+}
+
+.lender-return.completed {
+    border-color: #4caf50;
+}
+
+.return-label {
+    position: absolute;
+    bottom: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+/* Arrow heads for lender return */
+.lender-return::before {
+    content: '←';
+    position: absolute;
+    left: -8px;
+    bottom: -4px;
+    font-size: 1.2rem;
+    color: var(--border);
+    transition: color 0.3s ease;
+}
+
+.lender-return.animating::before,
+.lender-return.completed::before {
+    color: #4caf50;
 }
 
 .triangle-return.completed .connector-track {

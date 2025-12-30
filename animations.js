@@ -161,9 +161,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const lenderSteps = [
         { caption: "Click NEXT to see how it works", activeNode: null, animateConnector: null },
-        { caption: "💵 You deposit capital into the lending vault", activeNode: "investor", animateConnector: "left" },
+        { caption: "💵 You deposit capital into the lending vault", activeNode: "investor", animateConnector: 0 },
         { caption: "🏦 The vault pools investor funds", activeNode: "vault", animateConnector: null },
-        { caption: "🎫 Your capital funds tokenized invoices", activeNode: "vault", animateConnector: "right" },
+        { caption: "🎫 Your capital funds tokenized invoices", activeNode: "vault", animateConnector: 1 },
         { caption: "📄 Invoices are repaid by borrowers", activeNode: "invoices", animateConnector: null },
         { caption: "💰 Yield + principal flows back to you", activeNode: "invoices", animateConnector: "return" },
         { caption: "✅ Done! You earned yield from real-world invoice financing", activeNode: "investor", animateConnector: null }
@@ -212,7 +212,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             } else {
-                // Lender flow
+                // Lender flow - now uses same index-based approach for main connectors
+                const lenderConnectors = flow.querySelectorAll('.lender-main-row .flow-connector');
+                const returnConnector = flow.querySelector('.lender-return');
+
                 for (let i = 1; i < stepIndex; i++) {
                     const nodeName = lenderSteps[i].activeNode;
                     if (nodeName) {
@@ -220,9 +223,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (node) node.classList.add('completed');
                     }
                     const connId = lenderSteps[i].animateConnector;
-                    if (connId) {
-                        const conn = flow.querySelector(`.triangle-${connId}`);
-                        if (conn) conn.classList.add('completed');
+                    if (connId === "return" && returnConnector) {
+                        returnConnector.classList.add('completed');
+                    } else if (typeof connId === 'number' && lenderConnectors[connId]) {
+                        lenderConnectors[connId].classList.add('completed');
                     }
                 }
             }
@@ -235,14 +239,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Animate current connector
             if (step.animateConnector !== null) {
-                if (isBorrower) {
-                    const connectors = flow.querySelectorAll('.flow-connector');
-                    if (connectors[step.animateConnector]) {
-                        connectors[step.animateConnector].classList.add('animating');
-                    }
-                } else {
-                    const conn = flow.querySelector(`.triangle-${step.animateConnector}`);
-                    if (conn) conn.classList.add('animating');
+                const connectors = flow.querySelectorAll(isBorrower ? '.flow-connector' : '.lender-main-row .flow-connector');
+
+                if (step.animateConnector === "return") {
+                    const returnConn = flow.querySelector('.lender-return');
+                    if (returnConn) returnConn.classList.add('animating');
+                } else if (typeof step.animateConnector === 'number' && connectors[step.animateConnector]) {
+                    connectors[step.animateConnector].classList.add('animating');
                 }
             }
 
