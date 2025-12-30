@@ -1260,93 +1260,139 @@ body {
     position: relative;
 }
 
-.lender-return {
-    width: 70%;
-    max-width: 320px;
-    height: 30px;
-    border: 2px solid var(--border);
-    border-top: none;
-    border-radius: 0 0 30px 30px;
-    background: transparent;
+/* Return arrows - horizontal tracks connecting borrower back to lender */
+.lender-return-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.return-arrow {
     position: relative;
-}
-
-.lender-return .connector-track {
-    display: none;
-}
-
-/* Principal return - green */
-.lender-return-principal {
-    border-color: rgba(34, 197, 94, 0.4);
-}
-
-.lender-return-principal.animating,
-.lender-return-principal.completed {
-    border-color: #22c55e;
-}
-
-/* Interest return - gold/yellow */
-.lender-return-interest {
-    border-color: rgba(250, 204, 21, 0.4);
-    margin-top: -10px;
-    width: 50%;
-    max-width: 240px;
+    width: 90%;
+    max-width: 420px;
     height: 24px;
+    display: flex;
+    align-items: center;
 }
 
-.lender-return-interest.animating,
-.lender-return-interest.completed {
-    border-color: #facc15;
+.return-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    transform: translateY(-50%);
+}
+
+/* Arrow head pointing left (toward lender) */
+.return-track::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 10px solid var(--border);
+}
+
+.return-packet {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0;
+    z-index: 5;
 }
 
 .return-label {
     position: absolute;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 0.7rem;
     color: var(--text-light);
     white-space: nowrap;
-    background: var(--bg);
-    padding: 2px 8px;
-    border-radius: 10px;
+    opacity: 0.6;
+}
+
+/* Principal return - green */
+.lender-return-principal .return-track {
+    background: rgba(34, 197, 94, 0.3);
+}
+
+.lender-return-principal .return-track::before {
+    border-right-color: rgba(34, 197, 94, 0.3);
+}
+
+.lender-return-principal.animating .return-track,
+.lender-return-principal.completed .return-track {
+    background: #22c55e;
+}
+
+.lender-return-principal.animating .return-track::before,
+.lender-return-principal.completed .return-track::before {
+    border-right-color: #22c55e;
 }
 
 .lender-return-principal .return-label {
     color: #22c55e;
 }
 
+.lender-return-principal.animating .return-packet {
+    opacity: 1;
+    animation: packetReturnPrincipal 1.2s ease-in-out forwards;
+}
+
+@keyframes packetReturnPrincipal {
+    0% { right: 0; opacity: 1; }
+    100% { right: calc(100% - 20px); opacity: 1; }
+}
+
+/* Interest return - gold */
+.lender-return-interest .return-track {
+    background: rgba(250, 204, 21, 0.3);
+}
+
+.lender-return-interest .return-track::before {
+    border-right-color: rgba(250, 204, 21, 0.3);
+}
+
+.lender-return-interest.animating .return-track,
+.lender-return-interest.completed .return-track {
+    background: #facc15;
+}
+
+.lender-return-interest.animating .return-track::before,
+.lender-return-interest.completed .return-track::before {
+    border-right-color: #facc15;
+}
+
 .lender-return-interest .return-label {
     color: #facc15;
 }
 
-/* Arrow heads for lender return */
-.lender-return::before {
-    content: '←';
-    position: absolute;
-    left: -4px;
-    bottom: -6px;
-    font-size: 1rem;
-    color: var(--border);
-    transition: color 0.3s ease;
+.lender-return-interest.animating .return-packet {
+    opacity: 1;
+    animation: packetReturnInterest 1.2s ease-in-out forwards;
 }
 
-.lender-return-principal::before {
-    color: rgba(34, 197, 94, 0.5);
+@keyframes packetReturnInterest {
+    0% { right: 0; opacity: 1; }
+    100% { right: calc(100% - 20px); opacity: 1; }
 }
 
-.lender-return-principal.animating::before,
-.lender-return-principal.completed::before {
-    color: #22c55e;
-}
-
-.lender-return-interest::before {
-    color: rgba(250, 204, 21, 0.5);
-}
-
-.lender-return-interest.animating::before,
-.lender-return-interest.completed::before {
-    color: #facc15;
+/* Completed state shows packet at destination */
+.lender-return-principal.completed .return-packet,
+.lender-return-interest.completed .return-packet {
+    opacity: 1;
+    right: calc(100% - 20px);
 }
 
 .triangle-return.completed .connector-track {
