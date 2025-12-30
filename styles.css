@@ -149,7 +149,7 @@ body {
 
 
 /* Cards */
-.problem-card, .feature-card, .tech-card {
+.problem-card, .feature-card, .tech-card, .opportunity-card {
     background: var(--bg);
     padding: 32px;
     border-radius: 12px;
@@ -157,7 +157,7 @@ body {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.problem-card:hover, .feature-card:hover, .tech-card:hover {
+.problem-card:hover, .feature-card:hover, .tech-card:hover, .opportunity-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
@@ -168,12 +168,12 @@ body {
     margin-bottom: 16px;
 }
 
-.problem-card h3, .feature-card h3, .tech-card h3 {
+.problem-card h3, .feature-card h3, .tech-card h3, .opportunity-card h3 {
     font-size: 1.25rem;
     margin-bottom: 12px;
 }
 
-.problem-card p, .feature-card p, .tech-card p {
+.problem-card p, .feature-card p, .tech-card p, .opportunity-card p {
     color: var(--text-light);
 }
 
@@ -328,6 +328,15 @@ body {
 .journey-copy {
     flex: 1;
     max-width: 380px;
+}
+
+.journey-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 4px;
 }
 
 .journey-heading {
@@ -565,7 +574,7 @@ body {
 }
 
 /* Problem Grid */
-.problem-grid, .features-grid, .tech-grid {
+.problem-grid, .features-grid, .tech-grid, .opportunity-grid {
     display: grid;
     gap: 24px;
     margin-top: 48px;
@@ -579,7 +588,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.tech-grid {
+.tech-grid, .opportunity-grid {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
