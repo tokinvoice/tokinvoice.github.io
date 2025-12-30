@@ -318,6 +318,57 @@ body {
 }
 
 /* Journey Timeline */
+.journey-layout {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+
+.journey-copy {
+    flex: 1;
+    max-width: 380px;
+}
+
+.journey-heading {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.journey-tagline {
+    color: var(--text-light);
+    margin-bottom: 16px;
+}
+
+.journey-benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-light);
+}
+
+.journey-benefits li strong {
+    color: var(--text);
+}
+
+.journey-visuals {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.flow-caption {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+    max-width: 520px;
+    margin: 8px auto 0;
+}
+
 .journey-timeline {
     display: flex;
     justify-content: center;
@@ -696,6 +747,14 @@ body {
 
 /* Journey mobile responsive */
 @media (max-width: 900px) {
+    .journey-layout {
+        flex-direction: column;
+    }
+
+    .journey-copy {
+        max-width: 100%;
+    }
+
     .journey-timeline {
         flex-direction: column;
         align-items: center;

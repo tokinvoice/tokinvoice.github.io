@@ -128,8 +128,8 @@
     <!-- Animated User Journeys Section -->
     <section id="journeys" class="section section-alt">
         <div class="container">
-            <h2>Your Journey with TokInvoice</h2>
-            <p class="section-subtitle">Whether you're seeking working capital or earning yield, we've got you covered.</p>
+            <h2>See TokInvoice from both sides</h2>
+            <p class="section-subtitle">One on-chain flow, two clear outcomes: instant cash for borrowers and transparent yield for lenders.</p>
 
             <!-- Journey Toggle -->
             <div class="journey-toggle">
@@ -143,196 +143,226 @@
 
             <!-- Borrower Journey -->
             <div class="journey-container" id="borrower-journey">
-                <div class="journey-timeline">
-                    <div class="journey-step" data-step="1">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">📄</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Upload Invoice</h4>
-                            <p>Submit your invoice to TokInvoice</p>
-                        </div>
+                <div class="journey-layout">
+                    <div class="journey-copy">
+                        <h3 class="journey-heading">Borrower: Turn invoices into cash in minutes</h3>
+                        <p class="journey-tagline">For SMEs that are tired of waiting 30–90 days to get paid.</p>
+                        <ul class="journey-benefits">
+                            <li><strong>Instant working capital</strong> – unlock cash against approved invoices instead of waiting for terms.</li>
+                            <li><strong>No bank friction</strong> – no branch visits or long forms, just your existing invoice.</li>
+                            <li><strong>Upfront pricing</strong> – see your advance amount and fee before you click “Accept”.</li>
+                        </ul>
                     </div>
-                    <div class="journey-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-dot"></div>
-                    </div>
-                    <div class="journey-step" data-step="2">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">🔗</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Tokenization</h4>
-                            <p>Invoice becomes an MPT on XRPL</p>
-                        </div>
-                    </div>
-                    <div class="journey-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-dot"></div>
-                    </div>
-                    <div class="journey-step" data-step="3">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">📊</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Risk Assessment</h4>
-                            <p>AI + oracles determine your rate</p>
-                        </div>
-                    </div>
-                    <div class="journey-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-dot"></div>
-                    </div>
-                    <div class="journey-step" data-step="4">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">⚡</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Instant Funding</h4>
-                            <p>Receive stablecoins in seconds</p>
-                        </div>
-                    </div>
-                    <div class="journey-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-dot"></div>
-                    </div>
-                    <div class="journey-step" data-step="5">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">✅</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Auto-Settlement</h4>
-                            <p>Client pays, loan closes automatically</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Animated Flow Visualization -->
-                <div class="flow-animation borrower-flow">
-                    <div class="flow-entity supplier">
-                        <div class="entity-avatar">🏢</div>
-                        <span>Supplier</span>
-                    </div>
-                    <div class="flow-arrow">
-                        <div class="arrow-line"></div>
-                        <div class="flow-packet invoice-packet">📄</div>
-                    </div>
-                    <div class="flow-entity platform">
-                        <div class="entity-avatar">🔷</div>
-                        <span>TokInvoice</span>
-                    </div>
-                    <div class="flow-arrow reverse">
-                        <div class="arrow-line"></div>
-                        <div class="flow-packet money-packet">💵</div>
-                    </div>
-                    <div class="flow-entity vault">
-                        <div class="entity-avatar">🏦</div>
-                        <span>Lending Vault</span>
+                    <div class="journey-visuals">
+                        <div class="journey-timeline">
+                            <div class="journey-step" data-step="1">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">📄</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Connect & Upload</h4>
+                                    <p>Connect your invoicing tool or drag-and-drop a PDF invoice.</p>
+                                </div>
+                            </div>
+                            <div class="journey-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                            <div class="journey-step" data-step="2">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">🔗</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Tokenized on XRPL</h4>
+                                    <p>TokInvoice mints a regulated on-ledger token backed by your invoice.</p>
+                                </div>
+                            </div>
+                            <div class="journey-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                            <div class="journey-step" data-step="3">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">📊</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Instant Offer</h4>
+                                    <p>Our engine prices risk and shows your advance amount and clear fee.</p>
+                                </div>
+                            </div>
+                            <div class="journey-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                            <div class="journey-step" data-step="4">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">⚡</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Funds Released</h4>
+                                    <p>Capital moves from the lending vault to your account in seconds.</p>
+                                </div>
+                            </div>
+                            <div class="journey-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                            <div class="journey-step" data-step="5">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">✅</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Automatic Repayment</h4>
+                                    <p>Your customer pays the invoice as usual; the loan closes in the background.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Animated Flow Visualization -->
+                        <div class="flow-animation borrower-flow">
+                            <div class="flow-entity supplier">
+                                <div class="entity-avatar">🏢</div>
+                                <span>Supplier</span>
+                            </div>
+                            <div class="flow-arrow">
+                                <div class="arrow-line"></div>
+                                <div class="flow-packet invoice-packet">📄</div>
+                            </div>
+                            <div class="flow-entity platform">
+                                <div class="entity-avatar">🔷</div>
+                                <span>TokInvoice</span>
+                            </div>
+                            <div class="flow-arrow reverse">
+                                <div class="arrow-line"></div>
+                                <div class="flow-packet money-packet">💵</div>
+                            </div>
+                            <div class="flow-entity vault">
+                                <div class="entity-avatar">🏦</div>
+                                <span>Lending Vault</span>
+                            </div>
+                        </div>
+                        <p class="flow-caption">Behind the scenes, global capital in regulated vaults flows to your business, secured by your tokenized invoice.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Lender Journey -->
             <div class="journey-container hidden" id="lender-journey">
-                <div class="journey-timeline">
-                    <div class="journey-step" data-step="1">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">💳</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Deposit Capital</h4>
-                            <p>Add RLUSD to a lending vault</p>
-                        </div>
+                <div class="journey-layout">
+                    <div class="journey-copy">
+                        <h3 class="journey-heading">Lender: Short-duration real-world asset yield</h3>
+                        <p class="journey-tagline">For lenders who want transparent, programmable exposure to invoice financing.</p>
+                        <ul class="journey-benefits">
+                            <li><strong>Real assets, not hype</strong> – every position is backed by a specific, tokenized invoice.</li>
+                            <li><strong>Programmatic risk controls</strong> – fund only the risk tiers, currencies and terms that fit your mandate.</li>
+                            <li><strong>Clear liquidity</strong> – capital returns as invoices settle; no indefinite lockups.</li>
+                        </ul>
                     </div>
-                    <div class="journey-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-dot"></div>
-                    </div>
-                    <div class="journey-step" data-step="2">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">🎯</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Set Parameters</h4>
-                            <p>Choose risk tiers & target yield</p>
-                        </div>
-                    </div>
-                    <div class="journey-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-dot"></div>
-                    </div>
-                    <div class="journey-step" data-step="3">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">🤖</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Auto-Matching</h4>
-                            <p>Engine matches invoices to your vault</p>
-                        </div>
-                    </div>
-                    <div class="journey-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-dot"></div>
-                    </div>
-                    <div class="journey-step" data-step="4">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">📈</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Earn Yield</h4>
-                            <p>Short-duration RWA returns</p>
-                        </div>
-                    </div>
-                    <div class="journey-connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-dot"></div>
-                    </div>
-                    <div class="journey-step" data-step="5">
-                        <div class="step-icon-wrapper">
-                            <div class="step-icon">🔄</div>
-                            <div class="step-pulse"></div>
-                        </div>
-                        <div class="step-content">
-                            <h4>Reinvest or Withdraw</h4>
-                            <p>Full control of your capital</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Animated Flow Visualization -->
-                <div class="flow-animation lender-flow">
-                    <div class="flow-entity investor">
-                        <div class="entity-avatar">👤</div>
-                        <span>Investor</span>
-                    </div>
-                    <div class="flow-arrow">
-                        <div class="arrow-line"></div>
-                        <div class="flow-packet money-packet">💵</div>
-                    </div>
-                    <div class="flow-entity vault">
-                        <div class="entity-avatar">🏦</div>
-                        <span>Lending Vault</span>
-                    </div>
-                    <div class="flow-arrow">
-                        <div class="arrow-line"></div>
-                        <div class="flow-packet token-packet">🎫</div>
-                    </div>
-                    <div class="flow-entity invoices">
-                        <div class="entity-avatar">📄</div>
-                        <span>Invoice Pool</span>
-                    </div>
-                    <div class="flow-arrow reverse yield-arrow">
-                        <div class="arrow-line"></div>
-                        <div class="flow-packet yield-packet">💰</div>
+                    <div class="journey-visuals">
+                        <div class="journey-timeline">
+                            <div class="journey-step" data-step="1">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">💳</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Fund a Vault</h4>
+                                    <p>Deposit RLUSD into a permissioned lending vault on XRPL.</p>
+                                </div>
+                            </div>
+                            <div class="journey-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                            <div class="journey-step" data-step="2">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">🎯</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Set Your Mandate</h4>
+                                    <p>Choose risk buckets, geographies and target yield parameters.</p>
+                                </div>
+                            </div>
+                            <div class="journey-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                            <div class="journey-step" data-step="3">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">🤖</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Invoices Flow In</h4>
+                                    <p>TokInvoice auto-matches qualified invoices into your vault.</p>
+                                </div>
+                            </div>
+                            <div class="journey-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                            <div class="journey-step" data-step="4">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">📈</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Earn Yield</h4>
+                                    <p>Yield accrues as financed invoices repay into the vault.</p>
+                                </div>
+                            </div>
+                            <div class="journey-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                            <div class="journey-step" data-step="5">
+                                <div class="step-icon-wrapper">
+                                    <div class="step-icon">🔄</div>
+                                    <div class="step-pulse"></div>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Manage Liquidity</h4>
+                                    <p>Reinvest returns or withdraw capital as invoices roll off.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Animated Flow Visualization -->
+                        <div class="flow-animation lender-flow">
+                            <div class="flow-entity investor">
+                                <div class="entity-avatar">👤</div>
+                                <span>Investor</span>
+                            </div>
+                            <div class="flow-arrow">
+                                <div class="arrow-line"></div>
+                                <div class="flow-packet money-packet">💵</div>
+                            </div>
+                            <div class="flow-entity vault">
+                                <div class="entity-avatar">🏦</div>
+                                <span>Lending Vault</span>
+                            </div>
+                            <div class="flow-arrow">
+                                <div class="arrow-line"></div>
+                                <div class="flow-packet token-packet">🎫</div>
+                            </div>
+                            <div class="flow-entity invoices">
+                                <div class="entity-avatar">📄</div>
+                                <span>Invoice Pool</span>
+                            </div>
+                            <div class="flow-arrow reverse yield-arrow">
+                                <div class="arrow-line"></div>
+                                <div class="flow-packet yield-packet">💰</div>
+                            </div>
+                        </div>
+                        <p class="flow-caption">Your capital funds real invoices; as they repay, yield and principal return to your vault.</p>
                     </div>
                 </div>
             </div>
