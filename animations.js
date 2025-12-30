@@ -145,5 +145,132 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // ========================================
+    // STEP-THROUGH FLOW LOGIC
+    // ========================================
+
+    // Define the steps for each flow
+    const borrowerSteps = [
+        { caption: "Click NEXT to see how it works", activeNode: null, animateConnector: null },
+        { caption: "📄 You submit your invoice to TokInvoice", activeNode: "supplier", animateConnector: 0 },
+        { caption: "🔷 TokInvoice tokenizes your invoice on the blockchain", activeNode: "platform", animateConnector: null },
+        { caption: "💵 The vault provides immediate cash back to you", activeNode: "vault", animateConnector: 1 },
+        { caption: "✅ Done! You received early payment for your invoice", activeNode: "supplier", animateConnector: null }
+    ];
+
+    const lenderSteps = [
+        { caption: "Click NEXT to see how it works", activeNode: null, animateConnector: null },
+        { caption: "💵 You deposit capital into the lending vault", activeNode: "investor", animateConnector: "left" },
+        { caption: "🏦 The vault pools investor funds", activeNode: "vault", animateConnector: null },
+        { caption: "🎫 Your capital funds tokenized invoices", activeNode: "vault", animateConnector: "right" },
+        { caption: "📄 Invoices are repaid by borrowers", activeNode: "invoices", animateConnector: null },
+        { caption: "💰 Yield + principal flows back to you", activeNode: "invoices", animateConnector: "return" },
+        { caption: "✅ Done! You earned yield from real-world invoice financing", activeNode: "investor", animateConnector: null }
+    ];
+
+    // Initialize step flows
+    document.querySelectorAll('.step-flow').forEach(flow => {
+        const isBorrower = flow.classList.contains('borrower-step-flow');
+        const steps = isBorrower ? borrowerSteps : lenderSteps;
+        const nextBtn = flow.querySelector('.step-btn-next');
+        const resetBtn = flow.querySelector('.step-btn-reset');
+        let currentStep = 0;
+
+        function updateFlow(stepIndex) {
+            const step = steps[stepIndex];
+            flow.setAttribute('data-step', stepIndex);
+
+            // Update caption
+            const badge = flow.querySelector('.step-number-badge');
+            const text = flow.querySelector('.step-text');
+            badge.textContent = stepIndex;
+            text.textContent = step.caption;
+
+            // Reset all nodes and connectors
+            flow.querySelectorAll('.flow-node').forEach(n => {
+                n.classList.remove('active', 'completed');
+            });
+            flow.querySelectorAll('.flow-connector').forEach(c => {
+                c.classList.remove('animating', 'completed');
+            });
+
+            // Mark previous nodes as completed
+            if (isBorrower) {
+                const nodeOrder = ['supplier', 'platform', 'vault'];
+                for (let i = 1; i < stepIndex; i++) {
+                    const nodeName = borrowerSteps[i].activeNode;
+                    if (nodeName) {
+                        const node = flow.querySelector(`[data-node="${nodeName}"]`);
+                        if (node) node.classList.add('completed');
+                    }
+                    if (borrowerSteps[i].animateConnector !== null) {
+                        const connectors = flow.querySelectorAll('.flow-connector');
+                        if (connectors[borrowerSteps[i].animateConnector]) {
+                            connectors[borrowerSteps[i].animateConnector].classList.add('completed');
+                        }
+                    }
+                }
+            } else {
+                // Lender flow
+                for (let i = 1; i < stepIndex; i++) {
+                    const nodeName = lenderSteps[i].activeNode;
+                    if (nodeName) {
+                        const node = flow.querySelector(`[data-node="${nodeName}"]`);
+                        if (node) node.classList.add('completed');
+                    }
+                    const connId = lenderSteps[i].animateConnector;
+                    if (connId) {
+                        const conn = flow.querySelector(`.triangle-${connId}`);
+                        if (conn) conn.classList.add('completed');
+                    }
+                }
+            }
+
+            // Set current node as active
+            if (step.activeNode) {
+                const node = flow.querySelector(`[data-node="${step.activeNode}"]`);
+                if (node) node.classList.add('active');
+            }
+
+            // Animate current connector
+            if (step.animateConnector !== null) {
+                if (isBorrower) {
+                    const connectors = flow.querySelectorAll('.flow-connector');
+                    if (connectors[step.animateConnector]) {
+                        connectors[step.animateConnector].classList.add('animating');
+                    }
+                } else {
+                    const conn = flow.querySelector(`.triangle-${step.animateConnector}`);
+                    if (conn) conn.classList.add('animating');
+                }
+            }
+
+            // Update button states
+            resetBtn.disabled = stepIndex === 0;
+            if (stepIndex >= steps.length - 1) {
+                nextBtn.textContent = '✓ Complete';
+                nextBtn.disabled = true;
+            } else {
+                nextBtn.textContent = 'Next →';
+                nextBtn.disabled = false;
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateFlow(currentStep);
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            currentStep = 0;
+            updateFlow(currentStep);
+        });
+
+        // Initialize
+        updateFlow(0);
+    });
 });
 

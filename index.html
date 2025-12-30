@@ -225,33 +225,39 @@
                             </div>
                         </div>
 
-                        <!-- Animated Flow Visualization (Borrower: 1 invoice, 2 token, 3 cash) -->
-                        <div class="flow-animation borrower-flow">
-                            <div class="flow-entity supplier">
-                                <div class="flow-step-label">1</div>
-                                <div class="entity-avatar">🏢</div>
-                                <span>Supplier</span>
+                        <!-- Step-through Flow (Borrower) -->
+                        <div class="step-flow borrower-step-flow" data-step="0">
+                            <div class="step-flow-diagram">
+                                <div class="flow-node" data-node="supplier">
+                                    <div class="node-circle">🏢</div>
+                                    <span>Your Business</span>
+                                </div>
+                                <div class="flow-connector">
+                                    <div class="connector-track"></div>
+                                    <div class="connector-packet">📄</div>
+                                </div>
+                                <div class="flow-node" data-node="platform">
+                                    <div class="node-circle">🔷</div>
+                                    <span>TokInvoice</span>
+                                </div>
+                                <div class="flow-connector reverse">
+                                    <div class="connector-track"></div>
+                                    <div class="connector-packet">💵</div>
+                                </div>
+                                <div class="flow-node" data-node="vault">
+                                    <div class="node-circle">🏦</div>
+                                    <span>Lending Vault</span>
+                                </div>
                             </div>
-                            <div class="flow-arrow">
-                                <div class="arrow-line"></div>
-                                <div class="flow-packet invoice-packet">📄</div>
+                            <div class="step-flow-caption">
+                                <span class="step-number-badge">0</span>
+                                <span class="step-text">Click NEXT to see how it works</span>
                             </div>
-                            <div class="flow-entity platform">
-                                <div class="flow-step-label">2</div>
-                                <div class="entity-avatar">🔷</div>
-                                <span>TokInvoice</span>
-                            </div>
-                            <div class="flow-arrow reverse">
-                                <div class="arrow-line"></div>
-                                <div class="flow-packet money-packet">💵</div>
-                            </div>
-                            <div class="flow-entity vault">
-                                <div class="flow-step-label">3</div>
-                                <div class="entity-avatar">🏦</div>
-                                <span>Lending Vault</span>
+                            <div class="step-flow-controls">
+                                <button class="step-btn step-btn-reset" disabled>↺ Reset</button>
+                                <button class="step-btn step-btn-next">Next →</button>
                             </div>
                         </div>
-                        <p class="flow-caption">1) Your invoice moves into TokInvoice. 2) It is tokenized and funded from the vault. 3) Cash flows back to your business.</p>
                     </div>
                 </div>
             </div>
@@ -340,37 +346,52 @@
                             </div>
                         </div>
 
-                        <!-- Animated Flow Visualization (Lender: 1 capital in, 2 tokenized invoices, 3 yield back) -->
-                        <div class="flow-animation lender-flow">
-                            <div class="flow-entity investor">
-                                <div class="flow-step-label">1</div>
-                                <div class="entity-avatar">👤</div>
-                                <span>Investor</span>
+                        <!-- Step-through Flow (Lender) - Triangle layout -->
+                        <div class="step-flow lender-step-flow" data-step="0">
+                            <div class="step-flow-diagram triangle-layout">
+                                <!-- Top row: Vault in center -->
+                                <div class="triangle-top">
+                                    <div class="flow-node" data-node="vault">
+                                        <div class="node-circle">🏦</div>
+                                        <span>Lending Vault</span>
+                                    </div>
+                                </div>
+                                <!-- Connectors going down-left and down-right -->
+                                <div class="triangle-connectors">
+                                    <div class="flow-connector triangle-left">
+                                        <div class="connector-track"></div>
+                                        <div class="connector-packet">💵</div>
+                                    </div>
+                                    <div class="flow-connector triangle-right">
+                                        <div class="connector-track"></div>
+                                        <div class="connector-packet">🎫</div>
+                                    </div>
+                                </div>
+                                <!-- Bottom row: Investor left, Invoices right -->
+                                <div class="triangle-bottom">
+                                    <div class="flow-node" data-node="investor">
+                                        <div class="node-circle">👤</div>
+                                        <span>You (Investor)</span>
+                                    </div>
+                                    <div class="flow-connector triangle-return">
+                                        <div class="connector-track"></div>
+                                        <div class="connector-packet">💰</div>
+                                    </div>
+                                    <div class="flow-node" data-node="invoices">
+                                        <div class="node-circle">📄</div>
+                                        <span>Invoice Pool</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flow-arrow">
-                                <div class="arrow-line"></div>
-                                <div class="flow-packet money-packet">💵</div>
+                            <div class="step-flow-caption">
+                                <span class="step-number-badge">0</span>
+                                <span class="step-text">Click NEXT to see how it works</span>
                             </div>
-                            <div class="flow-entity vault">
-                                <div class="flow-step-label">2</div>
-                                <div class="entity-avatar">🏦</div>
-                                <span>Lending Vault</span>
-                            </div>
-                            <div class="flow-arrow">
-                                <div class="arrow-line"></div>
-                                <div class="flow-packet token-packet">🎫</div>
-                            </div>
-                            <div class="flow-entity invoices">
-                                <div class="flow-step-label">3</div>
-                                <div class="entity-avatar">📄</div>
-                                <span>Invoice Pool</span>
-                            </div>
-                            <div class="flow-arrow reverse yield-arrow">
-                                <div class="arrow-line"></div>
-                                <div class="flow-packet yield-packet">💰</div>
+                            <div class="step-flow-controls">
+                                <button class="step-btn step-btn-reset" disabled>↺ Reset</button>
+                                <button class="step-btn step-btn-next">Next →</button>
                             </div>
                         </div>
-                        <p class="flow-caption">1) Capital goes into the vault. 2) The vault funds tokenized invoices. 3) As invoices repay, yield and principal flow back to you.</p>
                     </div>
                 </div>
             </div>

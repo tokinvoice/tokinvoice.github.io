@@ -773,6 +773,303 @@ body {
     border-right-color: #4caf50;
 }
 
+/* ========================================
+   STEP-THROUGH FLOW (NEXT button style)
+   ======================================== */
+
+.step-flow {
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 184, 148, 0.05) 100%);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 32px 24px;
+}
+
+.step-flow-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 24px;
+}
+
+/* Flow nodes (entities) */
+.flow-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.node-circle {
+    width: 72px;
+    height: 72px;
+    background: var(--bg);
+    border: 3px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.flow-node.active .node-circle {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2), 0 4px 16px rgba(0, 102, 204, 0.3);
+    transform: scale(1.1);
+}
+
+.flow-node.completed .node-circle {
+    border-color: var(--accent);
+    background: rgba(0, 184, 148, 0.1);
+}
+
+.flow-node span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Connectors between nodes */
+.flow-connector {
+    width: 100px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.connector-track {
+    height: 4px;
+    width: 100%;
+    background: var(--border);
+    border-radius: 2px;
+    position: relative;
+    transition: background 0.4s ease;
+}
+
+.connector-track::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left: 10px solid var(--border);
+    transition: border-color 0.4s ease;
+}
+
+.flow-connector.reverse .connector-track::after {
+    right: auto;
+    left: -6px;
+    border-left: none;
+    border-right: 10px solid var(--border);
+}
+
+/* Active connector - shows the packet moving */
+.flow-connector.animating .connector-track {
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.flow-connector.animating .connector-track::after {
+    border-left-color: var(--accent);
+}
+
+.flow-connector.reverse.animating .connector-track::after {
+    border-right-color: var(--primary);
+}
+
+.flow-connector.completed .connector-track {
+    background: var(--accent);
+}
+
+.flow-connector.completed .connector-track::after {
+    border-left-color: var(--accent);
+}
+
+.flow-connector.reverse.completed .connector-track::after {
+    border-right-color: var(--accent);
+}
+
+/* Packet (emoji) that moves along connector */
+.connector-packet {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: none;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    z-index: 10;
+}
+
+.flow-connector.animating .connector-packet {
+    opacity: 1;
+    animation: packetMove 0.8s ease-in-out forwards;
+}
+
+.flow-connector.reverse.animating .connector-packet {
+    left: auto;
+    right: 0;
+    animation: packetMoveReverse 0.8s ease-in-out forwards;
+}
+
+@keyframes packetMove {
+    0% { left: 0; transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.3); }
+    100% { left: calc(100% - 24px); transform: translateY(-50%) scale(1); }
+}
+
+@keyframes packetMoveReverse {
+    0% { right: 0; transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.3); }
+    100% { right: calc(100% - 24px); transform: translateY(-50%) scale(1); }
+}
+
+/* Caption area */
+.step-flow-caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    min-height: 48px;
+}
+
+.step-number-badge {
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.step-text {
+    font-size: 1rem;
+    color: var(--text);
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Control buttons */
+.step-flow-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.step-btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid var(--primary);
+}
+
+.step-btn-next {
+    background: var(--primary);
+    color: white;
+}
+
+.step-btn-next:hover:not(:disabled) {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.step-btn-reset {
+    background: transparent;
+    color: var(--primary);
+}
+
+.step-btn-reset:hover:not(:disabled) {
+    background: rgba(0, 102, 204, 0.1);
+}
+
+.step-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ========================================
+   TRIANGLE LAYOUT (for lender flow)
+   ======================================== */
+
+.triangle-layout {
+    flex-direction: column;
+    gap: 20px;
+}
+
+.triangle-top {
+    display: flex;
+    justify-content: center;
+}
+
+.triangle-connectors {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    position: relative;
+}
+
+.triangle-left,
+.triangle-right {
+    width: 80px;
+    transform: rotate(45deg);
+}
+
+.triangle-right {
+    transform: rotate(-45deg);
+}
+
+.triangle-left .connector-track::after {
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+.triangle-right .connector-track::after {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.triangle-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+.triangle-return {
+    width: 120px;
+}
+
+.triangle-return .connector-track {
+    background: var(--border);
+}
+
+.triangle-return.animating .connector-track {
+    background: linear-gradient(90deg, #4caf50, #81c784);
+}
+
+.triangle-return.animating .connector-track::after {
+    border-left-color: #4caf50;
+}
+
+.triangle-return.completed .connector-track {
+    background: #4caf50;
+}
+
+.triangle-return.completed .connector-track::after {
+    border-left-color: #4caf50;
+}
+
 /* Journey mobile responsive */
 @media (max-width: 900px) {
     .journey-layout {
