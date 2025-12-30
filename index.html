@@ -225,9 +225,10 @@
                             </div>
                         </div>
 
-                        <!-- Animated Flow Visualization -->
+                        <!-- Animated Flow Visualization (Borrower: 1 invoice, 2 token, 3 cash) -->
                         <div class="flow-animation borrower-flow">
                             <div class="flow-entity supplier">
+                                <div class="flow-step-label">1</div>
                                 <div class="entity-avatar">🏢</div>
                                 <span>Supplier</span>
                             </div>
@@ -236,6 +237,7 @@
                                 <div class="flow-packet invoice-packet">📄</div>
                             </div>
                             <div class="flow-entity platform">
+                                <div class="flow-step-label">2</div>
                                 <div class="entity-avatar">🔷</div>
                                 <span>TokInvoice</span>
                             </div>
@@ -244,11 +246,12 @@
                                 <div class="flow-packet money-packet">💵</div>
                             </div>
                             <div class="flow-entity vault">
+                                <div class="flow-step-label">3</div>
                                 <div class="entity-avatar">🏦</div>
                                 <span>Lending Vault</span>
                             </div>
                         </div>
-                        <p class="flow-caption">Behind the scenes, global capital in regulated vaults flows to your business, secured by your tokenized invoice.</p>
+                        <p class="flow-caption">1) Your invoice moves into TokInvoice. 2) It is tokenized and funded from the vault. 3) Cash flows back to your business.</p>
                     </div>
                 </div>
             </div>
@@ -337,9 +340,10 @@
                             </div>
                         </div>
 
-                        <!-- Animated Flow Visualization -->
+                        <!-- Animated Flow Visualization (Lender: 1 capital in, 2 tokenized invoices, 3 yield back) -->
                         <div class="flow-animation lender-flow">
                             <div class="flow-entity investor">
+                                <div class="flow-step-label">1</div>
                                 <div class="entity-avatar">👤</div>
                                 <span>Investor</span>
                             </div>
@@ -348,6 +352,7 @@
                                 <div class="flow-packet money-packet">💵</div>
                             </div>
                             <div class="flow-entity vault">
+                                <div class="flow-step-label">2</div>
                                 <div class="entity-avatar">🏦</div>
                                 <span>Lending Vault</span>
                             </div>
@@ -356,6 +361,7 @@
                                 <div class="flow-packet token-packet">🎫</div>
                             </div>
                             <div class="flow-entity invoices">
+                                <div class="flow-step-label">3</div>
                                 <div class="entity-avatar">📄</div>
                                 <span>Invoice Pool</span>
                             </div>
@@ -364,7 +370,7 @@
                                 <div class="flow-packet yield-packet">💰</div>
                             </div>
                         </div>
-                        <p class="flow-caption">Your capital funds real invoices; as they repay, yield and principal return to your vault.</p>
+                        <p class="flow-caption">1) Capital goes into the vault. 2) The vault funds tokenized invoices. 3) As invoices repay, yield and principal flow back to you.</p>
                     </div>
                 </div>
             </div>

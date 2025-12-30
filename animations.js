@@ -85,10 +85,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const flowEntities = document.querySelectorAll('.flow-entity');
     flowEntities.forEach(entity => {
         entity.addEventListener('mouseenter', function() {
-            this.querySelector('.entity-avatar').style.transform = 'scale(1.15) rotate(5deg)';
+            const avatar = this.querySelector('.entity-avatar');
+            if (avatar) {
+                avatar.style.transform = 'scale(1.15) rotate(5deg)';
+            }
         });
         entity.addEventListener('mouseleave', function() {
-            this.querySelector('.entity-avatar').style.transform = '';
+            const avatar = this.querySelector('.entity-avatar');
+            if (avatar) {
+                avatar.style.transform = '';
+            }
         });
     });
 
@@ -110,17 +116,19 @@ document.addEventListener('DOMContentLoaded', function() {
     journeySteps.forEach(step => {
         step.addEventListener('click', function() {
             // Remove highlight from siblings
-            const siblings = this.parentElement.querySelectorAll('.journey-step');
+            const siblings = this.parentElement ? this.parentElement.querySelectorAll('.journey-step') : [];
             siblings.forEach(s => s.classList.remove('highlighted'));
             // Add highlight to clicked
             this.classList.add('highlighted');
             
             // Pulse effect
             const icon = this.querySelector('.step-icon');
-            icon.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                icon.style.transform = '';
-            }, 300);
+            if (icon) {
+                icon.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    icon.style.transform = '';
+                }, 300);
+            }
         });
     });
 

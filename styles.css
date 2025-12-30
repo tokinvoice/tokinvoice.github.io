@@ -609,11 +609,28 @@ body {
 }
 
 .flow-entity {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	z-index: 2;
+	position: relative;
+}
+
+.flow-step-label {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	width: 20px;
+	height: 20px;
+	border-radius: 999px;
+	background: var(--accent);
+	color: #ffffff;
+	font-size: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .entity-avatar {
@@ -731,9 +748,13 @@ body {
 }
 
 /* Stagger animations for multiple arrows */
-.flow-arrow:nth-of-type(2) .flow-packet { animation-delay: 0.5s; }
-.flow-arrow:nth-of-type(4) .flow-packet { animation-delay: 1s; }
-.flow-arrow.yield-arrow .flow-packet { animation-delay: 1.5s; }
+/* Stagger animations so the flow reads as a clear sequence */
+.borrower-flow .flow-arrow:nth-of-type(1) .flow-packet { animation-delay: 0.1s; }
+.borrower-flow .flow-arrow:nth-of-type(2) .flow-packet { animation-delay: 1.3s; }
+
+.lender-flow .flow-arrow:nth-of-type(1) .flow-packet { animation-delay: 0.1s; }
+.lender-flow .flow-arrow:nth-of-type(2) .flow-packet { animation-delay: 1.3s; }
+.lender-flow .flow-arrow:nth-of-type(3) .flow-packet { animation-delay: 2.5s; }
 
 /* Lender flow specific */
 .lender-flow .flow-arrow:nth-of-type(4) {
