@@ -698,6 +698,10 @@ body {
 .flow-packet {
     position: absolute;
     font-size: 1.5rem;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     animation: flowRight 2s infinite ease-in-out;
 }
 
@@ -709,20 +713,20 @@ body {
     0% {
         left: 0;
         opacity: 0;
-        transform: scale(0.5);
+        transform: translateY(-50%) scale(0.5);
     }
     20% {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(-50%) scale(1);
     }
     80% {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(-50%) scale(1);
     }
     100% {
         left: calc(100% - 24px);
         opacity: 0;
-        transform: scale(0.5);
+        transform: translateY(-50%) scale(0.5);
     }
 }
 
@@ -730,20 +734,20 @@ body {
     0% {
         left: calc(100% - 24px);
         opacity: 0;
-        transform: scale(0.5);
+        transform: translateY(-50%) scale(0.5);
     }
     20% {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(-50%) scale(1);
     }
     80% {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(-50%) scale(1);
     }
     100% {
         left: 0;
         opacity: 0;
-        transform: scale(0.5);
+        transform: translateY(-50%) scale(0.5);
     }
 }
 
