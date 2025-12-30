@@ -990,6 +990,7 @@ body {
     gap: 8px;
     z-index: 2;
     transition: opacity 0.4s ease;
+    position: relative;
 }
 
 /* Inactive nodes fade out */
@@ -1258,6 +1259,109 @@ body {
     display: flex;
     justify-content: center;
     position: relative;
+}
+
+/* Vault token indicator */
+.vault-token {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    font-size: 1rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    background: var(--bg);
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.vault-token.visible {
+    opacity: 1;
+    animation: tokenAppear 0.5s ease-out;
+}
+
+.vault-token.burning {
+    animation: tokenBurn 0.8s ease-out forwards;
+}
+
+@keyframes tokenAppear {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes tokenBurn {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); filter: brightness(1.5); }
+    100% { opacity: 0; transform: scale(0); }
+}
+
+/* Exchange connector - shows money going out, token coming in */
+.exchange-connector .connector-packet.token-in {
+    opacity: 0;
+    transform: translateY(-50%) translateX(100%);
+}
+
+.exchange-connector.animating .connector-packet.money-out {
+    animation: packetMove 1s ease-in-out forwards;
+}
+
+.exchange-connector.animating .connector-packet.token-in {
+    animation: tokenReturn 1s ease-in-out 0.5s forwards;
+}
+
+@keyframes tokenReturn {
+    0% { left: 100%; opacity: 1; transform: translateY(-50%); }
+    100% { left: 0%; opacity: 1; transform: translateY(-50%); }
+}
+
+.exchange-connector.completed .connector-packet.money-out {
+    left: 100%;
+    opacity: 0;
+}
+
+.exchange-connector.completed .connector-packet.token-in {
+    left: 0%;
+    opacity: 0;
+}
+
+/* Token burn row */
+.token-burn-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.token-burn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 20px;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+.token-burn.active {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+}
+
+.token-burn.active .burn-icon {
+    animation: flicker 0.5s ease-in-out infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.burn-label {
+    font-size: 0.75rem;
+    color: #ef4444;
 }
 
 /* Return arrows - horizontal tracks connecting borrower back to lender */

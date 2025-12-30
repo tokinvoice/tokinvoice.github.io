@@ -359,14 +359,14 @@
                             </div>
                         </div>
 
-                        <!-- Step-through Flow (Lender) - Shows borrower and separate returns -->
+                        <!-- Step-through Flow (Lender) - Shows full token lifecycle -->
                         <div class="step-flow lender-step-flow" data-step="0">
                             <!-- Controls at top right -->
                             <div class="step-flow-controls">
                                 <button class="step-btn step-btn-reset" disabled>↺</button>
                                 <button class="step-btn step-btn-next">Next →</button>
                             </div>
-                            <!-- Diagram: linear with borrower -->
+                            <!-- Diagram: shows token exchange and burn -->
                             <div class="step-flow-diagram lender-layout">
                                 <div class="lender-main-row">
                                     <div class="flow-node" data-node="investor">
@@ -380,17 +380,26 @@
                                     <div class="flow-node" data-node="vault">
                                         <div class="node-circle">🏦</div>
                                         <span>Lending Vault</span>
+                                        <div class="vault-token" data-token="held">🎫</div>
                                     </div>
-                                    <div class="flow-connector">
+                                    <div class="flow-connector exchange-connector">
                                         <div class="connector-track"></div>
-                                        <div class="connector-packet">💵</div>
+                                        <div class="connector-packet money-out">💵</div>
+                                        <div class="connector-packet token-in">🎫</div>
                                     </div>
                                     <div class="flow-node" data-node="borrower">
                                         <div class="node-circle">🏢</div>
                                         <span>Borrower</span>
                                     </div>
                                 </div>
-                                <!-- Return arrows: Principal and Interest with traveling packets -->
+                                <!-- Token burn indicator -->
+                                <div class="token-burn-row">
+                                    <div class="token-burn" data-burn="pending">
+                                        <span class="burn-icon">🔥</span>
+                                        <span class="burn-label">Token burned on repayment</span>
+                                    </div>
+                                </div>
+                                <!-- Return arrows: Principal and Interest -->
                                 <div class="lender-return-row">
                                     <div class="return-arrow lender-return-principal">
                                         <div class="return-track"></div>

@@ -160,14 +160,15 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const lenderSteps = [
-        { caption: "Click NEXT to see how it works", activeNode: null, animateConnector: null },
-        { caption: "💵 You deposit capital into the lending vault", activeNode: "investor", animateConnector: 0 },
-        { caption: "🏦 The vault pools funds from multiple lenders", activeNode: "vault", animateConnector: null },
-        { caption: "💵 Capital is lent to borrowers against their invoices", activeNode: "vault", animateConnector: 1 },
-        { caption: "🏢 Borrower receives funds and uses them for operations", activeNode: "borrower", animateConnector: null },
-        { caption: "💵 When invoice is paid, borrower repays the principal", activeNode: "borrower", animateConnector: "principal" },
-        { caption: "💰 Plus interest earned on top of your capital", activeNode: "borrower", animateConnector: "interest" },
-        { caption: "✅ Done! Your capital + interest returns to you", activeNode: "investor", animateConnector: null }
+        { caption: "Click NEXT to see how it works", activeNode: null, animateConnector: null, token: null },
+        { caption: "💵 You deposit capital into the lending vault", activeNode: "investor", animateConnector: 0, token: null },
+        { caption: "🏦 The vault pools funds from multiple lenders", activeNode: "vault", animateConnector: null, token: null },
+        { caption: "💵↔🎫 Vault exchanges cash for tokenized invoice", activeNode: "vault", animateConnector: "exchange", token: "receive" },
+        { caption: "🏢 Borrower gets cash, vault holds the invoice token", activeNode: "borrower", animateConnector: null, token: "hold" },
+        { caption: "🔥 Invoice paid! Token is burned, releasing value", activeNode: "vault", animateConnector: null, token: "burn" },
+        { caption: "💵 Principal flows back to you", activeNode: "investor", animateConnector: "principal", token: null },
+        { caption: "💰 Plus interest earned on top", activeNode: "investor", animateConnector: "interest", token: null },
+        { caption: "✅ Done! You earned yield from real invoice financing", activeNode: "investor", animateConnector: null, token: null }
     ];
 
     // Initialize step flows
@@ -213,10 +214,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             } else {
-                // Lender flow - handles main connectors and return arrows
+                // Lender flow - handles main connectors, return arrows, and tokens
                 const lenderConnectors = flow.querySelectorAll('.lender-main-row .flow-connector');
+                const exchangeConnector = flow.querySelector('.exchange-connector');
                 const principalReturn = flow.querySelector('.return-arrow.lender-return-principal');
                 const interestReturn = flow.querySelector('.return-arrow.lender-return-interest');
+                const vaultToken = flow.querySelector('.vault-token');
+                const tokenBurn = flow.querySelector('.token-burn');
 
                 for (let i = 1; i < stepIndex; i++) {
                     const nodeName = lenderSteps[i].activeNode;
@@ -225,12 +229,26 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (node) node.classList.add('completed');
                     }
                     const connId = lenderSteps[i].animateConnector;
-                    if (connId === "principal" && principalReturn) {
+                    if (connId === "exchange" && exchangeConnector) {
+                        exchangeConnector.classList.add('completed');
+                    } else if (connId === "principal" && principalReturn) {
                         principalReturn.classList.add('completed');
                     } else if (connId === "interest" && interestReturn) {
                         interestReturn.classList.add('completed');
                     } else if (typeof connId === 'number' && lenderConnectors[connId]) {
                         lenderConnectors[connId].classList.add('completed');
+                    }
+                    // Handle token states from previous steps
+                    const tokenState = lenderSteps[i].token;
+                    if (tokenState === "receive" || tokenState === "hold") {
+                        if (vaultToken) vaultToken.classList.add('visible');
+                    }
+                    if (tokenState === "burn") {
+                        if (vaultToken) {
+                            vaultToken.classList.remove('visible');
+                            vaultToken.classList.remove('burning');
+                        }
+                        if (tokenBurn) tokenBurn.classList.remove('active');
                     }
                 }
             }
@@ -241,11 +259,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (node) node.classList.add('active');
             }
 
+            // Handle token state for current step (lender only)
+            if (!isBorrower && step.token) {
+                const vaultToken = flow.querySelector('.vault-token');
+                const tokenBurn = flow.querySelector('.token-burn');
+
+                if (step.token === "receive") {
+                    if (vaultToken) vaultToken.classList.add('visible');
+                } else if (step.token === "hold") {
+                    if (vaultToken) vaultToken.classList.add('visible');
+                } else if (step.token === "burn") {
+                    if (vaultToken) {
+                        vaultToken.classList.add('visible');
+                        vaultToken.classList.add('burning');
+                    }
+                    if (tokenBurn) tokenBurn.classList.add('active');
+                }
+            }
+
             // Animate current connector
             if (step.animateConnector !== null) {
                 const connectors = flow.querySelectorAll(isBorrower ? '.flow-connector' : '.lender-main-row .flow-connector');
 
-                if (step.animateConnector === "principal") {
+                if (step.animateConnector === "exchange") {
+                    const exchangeConn = flow.querySelector('.exchange-connector');
+                    if (exchangeConn) exchangeConn.classList.add('animating');
+                } else if (step.animateConnector === "principal") {
                     const principalConn = flow.querySelector('.return-arrow.lender-return-principal');
                     if (principalConn) principalConn.classList.add('animating');
                 } else if (step.animateConnector === "interest") {
