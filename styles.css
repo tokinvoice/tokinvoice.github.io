@@ -1100,7 +1100,7 @@ body {
 
 .triangle-layout {
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 .triangle-top {
@@ -1111,26 +1111,31 @@ body {
 .triangle-connectors {
     display: flex;
     justify-content: center;
-    gap: 80px;
+    gap: 60px;
     position: relative;
 }
 
-.triangle-left,
-.triangle-right {
-    width: 80px;
-    transform: rotate(45deg);
+/* Left arrow: Investor → Vault (pointing UP-RIGHT toward vault) */
+.triangle-left {
+    width: 70px;
+    height: 50px;
+    transform: rotate(-50deg);
 }
 
-.triangle-right {
-    transform: rotate(-45deg);
-}
-
+/* Arrow points toward vault (up) */
 .triangle-left .connector-track::after {
-    transform: translateY(-50%) rotate(-45deg);
+    transform: translateY(-50%) rotate(50deg);
+}
+
+/* Right arrow: Vault → Invoices (pointing DOWN-RIGHT toward invoices) */
+.triangle-right {
+    width: 70px;
+    height: 50px;
+    transform: rotate(50deg);
 }
 
 .triangle-right .connector-track::after {
-    transform: translateY(-50%) rotate(45deg);
+    transform: translateY(-50%) rotate(-50deg);
 }
 
 .triangle-bottom {
@@ -1140,8 +1145,17 @@ body {
     gap: 0;
 }
 
+/* Return arrow: Invoices → Investor (pointing LEFT) */
 .triangle-return {
-    width: 120px;
+    width: 100px;
+}
+
+/* Make it a reverse arrow (points left) */
+.triangle-return .connector-track::after {
+    right: auto;
+    left: -6px;
+    border-left: none;
+    border-right: 10px solid var(--border);
 }
 
 .triangle-return .connector-track {
@@ -1149,11 +1163,15 @@ body {
 }
 
 .triangle-return.animating .connector-track {
-    background: linear-gradient(90deg, #4caf50, #81c784);
+    background: linear-gradient(270deg, #4caf50, #81c784);
 }
 
 .triangle-return.animating .connector-track::after {
-    border-left-color: #4caf50;
+    border-right-color: #4caf50;
+}
+
+.triangle-return.completed .connector-track::after {
+    border-right-color: #4caf50;
 }
 
 .triangle-return.completed .connector-track {

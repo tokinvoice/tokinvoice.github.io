@@ -352,46 +352,43 @@
                             </div>
                         </div>
 
-                        <!-- Step-through Flow (Lender) - Triangle layout -->
+                        <!-- Step-through Flow (Lender) - Linear with return arrow -->
                         <div class="step-flow lender-step-flow" data-step="0">
                             <!-- Controls at top right -->
                             <div class="step-flow-controls">
                                 <button class="step-btn step-btn-reset" disabled>↺</button>
                                 <button class="step-btn step-btn-next">Next →</button>
                             </div>
-                            <!-- Diagram -->
-                            <div class="step-flow-diagram triangle-layout">
-                                <!-- Top row: Vault in center -->
-                                <div class="triangle-top">
-                                    <div class="flow-node" data-node="vault">
-                                        <div class="node-circle">🏦</div>
-                                        <span>Lending Vault</span>
-                                    </div>
-                                </div>
-                                <!-- Connectors going down-left and down-right -->
-                                <div class="triangle-connectors">
-                                    <div class="flow-connector triangle-left">
-                                        <div class="connector-track"></div>
-                                        <div class="connector-packet">💵</div>
-                                    </div>
-                                    <div class="flow-connector triangle-right">
-                                        <div class="connector-track"></div>
-                                        <div class="connector-packet">🎫</div>
-                                    </div>
-                                </div>
-                                <!-- Bottom row: Investor left, Invoices right -->
-                                <div class="triangle-bottom">
+                            <!-- Diagram: linear row with curved return below -->
+                            <div class="step-flow-diagram lender-layout">
+                                <div class="lender-main-row">
                                     <div class="flow-node" data-node="investor">
                                         <div class="node-circle">👤</div>
                                         <span>You (Investor)</span>
                                     </div>
-                                    <div class="flow-connector triangle-return">
+                                    <div class="flow-connector lender-arrow-1">
                                         <div class="connector-track"></div>
-                                        <div class="connector-packet">💰</div>
+                                        <div class="connector-packet">💵</div>
+                                    </div>
+                                    <div class="flow-node" data-node="vault">
+                                        <div class="node-circle">🏦</div>
+                                        <span>Lending Vault</span>
+                                    </div>
+                                    <div class="flow-connector lender-arrow-2">
+                                        <div class="connector-track"></div>
+                                        <div class="connector-packet">🎫</div>
                                     </div>
                                     <div class="flow-node" data-node="invoices">
                                         <div class="node-circle">📄</div>
                                         <span>Invoice Pool</span>
+                                    </div>
+                                </div>
+                                <!-- Curved return arrow below -->
+                                <div class="lender-return-row">
+                                    <div class="flow-connector lender-return reverse">
+                                        <div class="connector-track"></div>
+                                        <div class="connector-packet">💰</div>
+                                        <span class="return-label">Yield returns</span>
                                     </div>
                                 </div>
                             </div>
