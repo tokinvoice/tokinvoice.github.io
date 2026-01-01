@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TokInvoice - The Future of Invoice Financing</title>
-    <meta name="description" content="TokInvoice transforms invoices into instant working capital using XRPL blockchain technology. Get funded in seconds, not weeks.">
+    <meta name="description"
+        content="TokInvoice transforms invoices into instant working capital using XRPL blockchain technology. Get funded in seconds, not weeks.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <!-- GSAP for cross-browser animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
+
 <body>
     <!-- Animated background blobs -->
     <div class="bg-animation">
@@ -36,7 +40,8 @@
     <header class="hero">
         <div class="container">
             <h1>The Future of Invoice Financing</h1>
-            <p class="hero-subtitle">Transform your outstanding invoices into <strong>instant working capital</strong>. Get funded in seconds, not weeks.</p>
+            <p class="hero-subtitle">Transform your outstanding invoices into <strong>instant working capital</strong>.
+                Get funded in seconds, not weeks.</p>
             <div class="hero-buttons">
                 <a href="#how-it-works" class="btn btn-primary">Learn More</a>
                 <a href="https://github.com/tokinvoice" target="_blank" class="btn btn-outline">View on GitHub</a>
@@ -118,7 +123,8 @@
                 <div class="step">
                     <div class="step-number">2</div>
                     <h3>Price & Match</h3>
-                    <p>Our lending engine evaluates risk using on-chain oracles and matches your invoice to funding pools.</p>
+                    <p>Our lending engine evaluates risk using on-chain oracles and matches your invoice to funding
+                        pools.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
@@ -138,7 +144,8 @@
     <section id="journeys" class="section section-alt">
         <div class="container">
             <h2>See TokInvoice from both sides</h2>
-            <p class="section-subtitle">One on-chain flow, two clear outcomes: instant cash for borrowers and transparent yield for lenders.</p>
+            <p class="section-subtitle">One on-chain flow, two clear outcomes: instant cash for borrowers and
+                transparent yield for lenders.</p>
 
             <!-- Journey Toggle -->
             <div class="journey-toggle">
@@ -156,11 +163,15 @@
                     <div class="journey-copy">
                         <div class="journey-label">For founders &amp; finance teams</div>
                         <h3 class="journey-heading">Borrower: Turn invoices into cash in minutes</h3>
-                        <p class="journey-tagline">For SMEs that are tired of waiting 30–90 days to get paid by large buyers.</p>
+                        <p class="journey-tagline">For SMEs that are tired of waiting 30–90 days to get paid by large
+                            buyers.</p>
                         <ul class="journey-benefits">
-                            <li><strong>Instant working capital</strong> – unlock cash against approved invoices instead of waiting for terms.</li>
-                            <li><strong>No bank friction</strong> – no branch visits or long forms, just your existing invoice.</li>
-                            <li><strong>Upfront pricing</strong> – see your advance amount and fee before you click “Accept”.</li>
+                            <li><strong>Instant working capital</strong> – unlock cash against approved invoices instead
+                                of waiting for terms.</li>
+                            <li><strong>No bank friction</strong> – no branch visits or long forms, just your existing
+                                invoice.</li>
+                            <li><strong>Upfront pricing</strong> – see your advance amount and fee before you click
+                                “Accept”.</li>
                         </ul>
                     </div>
 
@@ -242,34 +253,72 @@
                                 <button class="step-btn step-btn-next">Next →</button>
                             </div>
                             <!-- Diagram -->
-                            <div class="step-flow-diagram">
-                                <div class="flow-node" data-node="supplier">
-                                    <div class="node-circle">🏢</div>
-                                    <span>Your Business</span>
-                                </div>
-                                <div class="flow-connector">
-                                    <div class="connector-track"></div>
-                                    <div class="connector-packet">📄</div>
-                                </div>
-                                <div class="flow-node" data-node="platform">
+                            <div class="step-flow-diagram borrower-triangle-layout">
+                                <!-- Top Node: Platform -->
+                                <div class="flow-node node-platform" data-node="platform">
                                     <div class="node-circle">🔷</div>
                                     <span>TokInvoice</span>
                                 </div>
-                                <div class="flow-connector reverse">
-                                    <div class="connector-track"></div>
-                                    <div class="connector-packet">💵</div>
+
+                                <!-- Left Node: Business -->
+                                <div class="flow-node node-business" data-node="supplier">
+                                    <div class="node-circle">🏢</div>
+                                    <span>Your Business</span>
                                 </div>
-                                <div class="flow-node" data-node="vault">
+
+                                <!-- Right Node: Vault -->
+                                <div class="flow-node node-vault" data-node="vault">
                                     <div class="node-circle">🏦</div>
                                     <span>Lending Vault</span>
                                 </div>
+
+                                <!-- Connectors Layer (SVG) -->
+                                <svg class="flow-svg-layer" viewBox="0 0 500 320" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <!-- Arrow Marker -->
+                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+                                            orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+                                        </marker>
+                                        <marker id="arrowhead-active" markerWidth="10" markerHeight="7" refX="9"
+                                            refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#818cf8" />
+                                        </marker>
+                                        <marker id="arrowhead-done" markerWidth="10" markerHeight="7" refX="9"
+                                            refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee" />
+                                        </marker>
+                                    </defs>
+
+                                    <!-- 1. Invoice: Business (70, 270) -> Platform (250, 70) -->
+                                    <line id="track-0" class="connector-track" x1="110" y1="226" x2="210" y2="114"
+                                        marker-end="url(#arrowhead)" />
+                                    <g id="packet-0" class="connector-packet-group" opacity="0">
+                                        <text x="0" y="0" font-size="24">📄</text>
+                                    </g>
+
+                                    <!-- 2. Token: Platform (250, 70) -> Vault (430, 270) -->
+                                    <line id="track-1" class="connector-track" x1="290" y1="114" x2="390" y2="226"
+                                        marker-end="url(#arrowhead)" />
+                                    <g id="packet-1" class="connector-packet-group" opacity="0">
+                                        <text x="0" y="0" font-size="24">🎫</text>
+                                    </g>
+
+                                    <!-- 3. Cash: Vault (430, 270) -> Business (70, 270) -->
+                                    <line id="track-2" class="connector-track" x1="370" y1="270" x2="130" y2="270"
+                                        marker-end="url(#arrowhead)" />
+                                    <g id="packet-2" class="connector-packet-group" opacity="0">
+                                        <text x="0" y="0" font-size="24">💵</text>
+                                    </g>
+                                </svg>
                             </div>
-                            <!-- Caption grows below -->
+                            <!-- Caption: growing list of steps -->
                             <div class="step-flow-caption">
-                                <span class="step-number-badge">0</span>
-                                <div class="step-caption-content">
-                                    <span class="step-text">Click NEXT to see how it works</span>
-                                    <div class="step-history"></div>
+                                <div class="step-list">
+                                    <div class="step-item current">
+                                        <span class="step-number-badge">0</span>
+                                        <span class="step-text">Click NEXT to see how it works</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -283,11 +332,15 @@
                     <div class="journey-copy">
                         <div class="journey-label">For funds, treasuries &amp; lenders</div>
                         <h3 class="journey-heading">Lender: Short-duration real-world asset yield</h3>
-                        <p class="journey-tagline">For funds, treasuries and regulated lenders who want transparent, programmable exposure to invoice financing.</p>
+                        <p class="journey-tagline">For funds, treasuries and regulated lenders who want transparent,
+                            programmable exposure to invoice financing.</p>
                         <ul class="journey-benefits">
-                            <li><strong>Real assets, not hype</strong> – every position is backed by a specific, tokenized invoice.</li>
-                            <li><strong>Programmatic risk controls</strong> – fund only the risk tiers, currencies and terms that fit your mandate.</li>
-                            <li><strong>Clear liquidity</strong> – capital returns as invoices settle; no indefinite lockups.</li>
+                            <li><strong>Real assets, not hype</strong> – every position is backed by a specific,
+                                tokenized invoice.</li>
+                            <li><strong>Programmatic risk controls</strong> – fund only the risk tiers, currencies and
+                                terms that fit your mandate.</li>
+                            <li><strong>Clear liquidity</strong> – capital returns as invoices settle; no indefinite
+                                lockups.</li>
                         </ul>
                     </div>
 
@@ -369,64 +422,74 @@
                                 <button class="step-btn step-btn-next">Next →</button>
                             </div>
                             <!-- Diagram: shows token exchange and burn -->
-                            <div class="step-flow-diagram lender-layout">
-                                <div class="lender-main-row">
-                                    <div class="flow-node" data-node="investor">
-                                        <div class="node-circle">👤</div>
-                                        <span>You (Lender)</span>
-                                    </div>
-                                    <div class="flow-connector">
-                                        <div class="connector-track"></div>
-                                        <div class="connector-packet">💵</div>
-                                    </div>
-                                    <div class="flow-node" data-node="vault">
-                                        <div class="node-circle">🏦</div>
-                                        <span>Lending Vault</span>
-                                        <div class="vault-token" data-token="held">🎫</div>
-                                    </div>
-                                    <div class="flow-connector exchange-connector">
-                                        <div class="connector-track"></div>
-                                        <div class="connector-packet money-out">💵</div>
-                                        <div class="connector-packet token-in">🎫</div>
-                                    </div>
-                                    <div class="flow-node" data-node="borrower">
-                                        <div class="node-circle">🏢</div>
-                                        <span>Borrower</span>
-                                    </div>
+                            <!-- New SVG-based Lender Layout -->
+                            <div class="lender-main-row" style="display: block; position: relative; height: 240px;">
+
+                                <!-- Nodes (Absolute Positioned via CSS) -->
+                                <div class="flow-node node-investor" data-node="investor">
+                                    <div class="node-circle">👤</div>
+                                    <span>Lender</span>
                                 </div>
-                                <!-- Token burn indicator -->
-                                <div class="token-burn-row">
-                                    <div class="token-burn" data-burn="pending">
-                                        <span class="burn-icon">🔥</span>
-                                        <span class="burn-label">Token burned on repayment</span>
-                                    </div>
+
+                                <div class="flow-node node-vault" data-node="vault">
+                                    <div class="node-circle">🏦</div>
+                                    <span>Vault</span>
+                                    <div class="vault-token" data-token="held">🎫</div>
                                 </div>
-                                <!-- Simplified return lanes: Principal and Interest stacked -->
-                                <div class="lender-return-lanes">
-                                    <div class="return-lane lender-return-principal" data-lane="principal">
-                                        <span class="return-lane-label">Principal</span>
-                                        <div class="return-lane-track">
-                                            <div class="return-lane-arrow"></div>
-                                            <div class="return-lane-packet">💵</div>
-                                        </div>
-                                        <div class="return-lane-token">💵</div>
-                                    </div>
-                                    <div class="return-lane lender-return-interest" data-lane="interest">
-                                        <span class="return-lane-label">Interest</span>
-                                        <div class="return-lane-track">
-                                            <div class="return-lane-arrow"></div>
-                                            <div class="return-lane-packet">💰</div>
-                                        </div>
-                                        <div class="return-lane-token">💰</div>
-                                    </div>
+
+                                <div class="flow-node node-borrower" data-node="borrower">
+                                    <div class="node-circle">🏢</div>
+                                    <span>Borrower</span>
                                 </div>
+
+                                <!-- SVG Layer -->
+                                <svg class="flow-svg-layer lender-svg" viewBox="0 0 600 240"
+                                    preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <marker id="arrowhead-lender" markerWidth="10" markerHeight="7" refX="9"
+                                            refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+                                        </marker>
+                                        <marker id="arrowhead-lender-active" markerWidth="10" markerHeight="7" refX="9"
+                                            refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#818cf8" />
+                                        </marker>
+                                        <marker id="arrowhead-lender-green" markerWidth="10" markerHeight="7" refX="9"
+                                            refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee" />
+                                        </marker>
+                                    </defs>
+
+                                    <!-- Path 0: Investor (80, 120) -> Vault (300, 120) -->
+                                    <!-- Trimmed: 80+50=130, 300-50=250 -->
+                                    <line id="lender-track-0" class="connector-track" x1="130" y1="120" x2="250"
+                                        y2="120" />
+                                    <g id="lender-packet-0" class="connector-packet-group" opacity="0">
+                                        <text x="0" y="0" font-size="24">💵</text>
+                                    </g>
+
+                                    <!-- Path 1: Vault (300, 120) -> Borrower (520, 120) -->
+                                    <!-- Trimmed: 300+50=350, 520-50=470 -->
+                                    <line id="lender-track-1" class="connector-track" x1="350" y1="120" x2="470"
+                                        y2="120" />
+                                    <g id="lender-packet-1" class="connector-packet-group" opacity="0">
+                                        <text x="0" y="0" font-size="24">💵</text>
+                                    </g>
+                                    <g id="lender-invoice-1" class="connector-packet-group" opacity="0">
+                                        <text x="0" y="0" font-size="24">📄</text>
+                                    </g>
+                                    <g id="lender-packet-1" class="connector-packet-group" opacity="0">
+                                        <text x="0" y="0" font-size="24">💵</text>
+                                    </g>
+                                </svg>
                             </div>
-                            <!-- Caption grows below -->
+                            <!-- Caption: growing list of steps -->
                             <div class="step-flow-caption">
-                                <span class="step-number-badge">0</span>
-                                <div class="step-caption-content">
-                                    <span class="step-text">Click NEXT to see how it works</span>
-                                    <div class="step-history"></div>
+                                <div class="step-list">
+                                    <div class="step-item current">
+                                        <span class="step-number-badge">0</span>
+                                        <span class="step-text">Click NEXT to see how it works</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -439,7 +502,8 @@
     <section id="technology" class="section">
         <div class="container">
             <h2>Built on XRPL</h2>
-            <p class="section-subtitle">Leveraging the XRP Ledger's unique capabilities for real-world asset financing.</p>
+            <p class="section-subtitle">Leveraging the XRP Ledger's unique capabilities for real-world asset financing.
+            </p>
             <div class="tech-grid">
                 <div class="tech-card">
                     <h3>Multi-Purpose Tokens (MPT)</h3>
@@ -457,6 +521,10 @@
                     <h3>Atomic Settlement</h3>
                     <p>3-5 second finality. If one side fails, the whole trade fails. Zero counterparty risk.</p>
                 </div>
+                <div class="tech-card">
+                    <h3>XLS-82 (MPT on DEX)</h3>
+                    <p>Enables secondary market trading of tokenized invoices via the native XRPL AMM and DEX.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -465,21 +533,69 @@
         <div class="container">
             <h2>The opportunity: regulated invoice RWAs on XRPL</h2>
             <p class="section-subtitle">
-                XRPL's Multi-Purpose Tokens (MPT) and lending primitives turn invoices into programmable real-world assets that can be structured to fit MiCA and similar regulatory frameworks.
+                XRPL's Multi-Purpose Tokens (MPT) and lending primitives turn invoices into programmable real-world
+                assets that can be structured to fit MiCA and similar regulatory frameworks.
             </p>
             <div class="opportunity-grid">
                 <div class="opportunity-card">
                     <h3>Native RWA standard</h3>
-                    <p>MPTs live directly on the XRPL ledger with rich metadata, issuer controls and clawback. You get an on-ledger invoice registry instead of a database that merely claims to back a token.</p>
+                    <p>MPTs live directly on the XRPL ledger with rich metadata, issuer controls and clawback. You get
+                        an on-ledger invoice registry instead of a database that merely claims to back a token.</p>
                 </div>
                 <div class="opportunity-card">
                     <h3>Built for European regulation</h3>
-                    <p>XRPL's issuer model, regulated stablecoins and authorization flags make it easier to map roles like issuer, custodian and lender to MiCA categories such as e-money and asset-referenced tokens.</p>
+                    <p>XRPL's issuer model, regulated stablecoins and authorization flags make it easier to map roles
+                        like issuer, custodian and lender to MiCA categories such as e-money and asset-referenced
+                        tokens.</p>
                 </div>
                 <div class="opportunity-card">
                     <h3>Fiat in, fiat out</h3>
-                    <p>Suppliers and lenders see familiar bank transfers. Under the hood, XRPL vaults and stablecoins handle settlement, giving you on-chain transparency with a traditional finance UX.</p>
+                    <p>Suppliers and lenders see familiar bank transfers. Under the hood, XRPL vaults and stablecoins
+                        handle settlement, giving you on-chain transparency with a traditional finance UX.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why XRPL Comparison Section -->
+    <section id="why-xrpl" class="section">
+        <div class="container">
+            <h2>Why XRPL?</h2>
+            <p class="section-subtitle">Purpose-built for finance, outperforming general-purpose chains for invoice use
+                cases.</p>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="feature-col">Feature</th>
+                            <th class="eth-col">Ethereum / L2s</th>
+                            <th class="xrpl-col">XRPL (TokInvoice)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-col">Settlement Time</td>
+                            <td class="eth-col">12+ mins (Mainnet) or variable</td>
+                            <td class="xrpl-col highlight"><strong>3-5 Seconds</strong> (Native)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-col">Transaction Fees</td>
+                            <td class="eth-col">Volatile ($1–$50+)</td>
+                            <td class="xrpl-col highlight"><strong>&lt;$0.0001</strong> (Fixed)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-col">Compliance</td>
+                            <td class="eth-col">Smart Contract logic (Fragile)</td>
+                            <td class="xrpl-col highlight"><strong>Native Primitives</strong> (Clawback, Freeze)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-col">Security Model</td>
+                            <td class="eth-col">Bespoke Contracts (Audit dependent)</td>
+                            <td class="xrpl-col highlight"><strong>Protocol Native</strong> (Battle-tested L1)</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -488,7 +604,8 @@
         <div class="container">
             <h2>Your money is yours. Access it the moment you invoice.</h2>
             <p>Stop playing banker for your clients.</p>
-            <a href="https://github.com/tokinvoice" target="_blank" class="btn btn-primary btn-large">Explore on GitHub</a>
+            <a href="https://github.com/tokinvoice" target="_blank" class="btn btn-primary btn-large">Explore on
+                GitHub</a>
         </div>
     </section>
 
@@ -502,5 +619,5 @@
     </footer>
     <script src="animations.js"></script>
 </body>
-</html>
 
+</html>
